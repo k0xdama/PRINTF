@@ -3,6 +3,8 @@
 int	main(void)
 {
 	// printf("SOME MIX\n");
+	// printf("\n");
+	// printf("\n");
 	// printf("%c - %s - %p %d - %i - %u - %x %X %%", 'a', "test", (void *)0xdeadc0de, 20, -20, -1, -1, 200000000);
 	// printf("char and width\n");
 	// printf("%10c", 'a');
@@ -18,7 +20,9 @@ int	main(void)
 	// printf("%5chis paragraph is indented", 't');
 	// printf("\n");
 
-	// printf("STRING WITH WIDTH\n");
+	// printf("STRING WITH WIDTH");
+	// printf("\n");
+	// printf("\n");
 	// printf("%1s", "abc");
 	// printf("\n");
 	// printf("%7s", "abc");
@@ -37,6 +41,7 @@ int	main(void)
 
 	// printf("POINTERS WITH WIDTH");
 	// printf("\n");
+	// printf("\n");
 	// char c = 'a';
 	// printf("%30p", &c);
 	// printf("\n");
@@ -54,6 +59,7 @@ int	main(void)
 	// printf("\n");
 
 	// printf("INT WITH WIDTH");
+	// printf("\n");
 	// printf("\n");
 	// printf("%1d", 0);
 	// printf("\n");
@@ -76,6 +82,7 @@ int	main(void)
 
 	// printf("%%I WITH WIDTH");
 	// printf("\n");
+	// printf("\n");
 	// printf("%1i", 0);
 	// printf("\n");
 	// printf("%42i", 42000);
@@ -97,6 +104,7 @@ int	main(void)
 
 	// printf("UNSIGNED WITH WIDTH");
 	// printf("\n");
+	// printf("\n");
 	// printf("%1u", 0);
 	// printf("\n");
 	// printf("%30u", 1000);
@@ -109,6 +117,7 @@ int	main(void)
 	// printf("\n");
 
 	// printf("HEXA MIN AND MAJ WITH WIDTH");
+	// printf("\n");
 	// printf("\n");
 	// printf("%1x", 0);
 	// printf("\n");
@@ -148,6 +157,7 @@ int	main(void)
 
 	// printf("STRING WITH PRECISION");
 	// printf("\n");
+	// printf("\n");
 	// printf("%.s", "hi there");
 	// printf("\n");
 	// printf("%.0s", "hi there");
@@ -183,6 +193,7 @@ int	main(void)
 	// printf("\n");
 
 	// printf("%%d AND %%i WITH PRECISION");
+	// printf("\n");
 	// printf("\n");
 	// printf("%.1d", 2);
 	// printf("\n");
@@ -247,6 +258,7 @@ int	main(void)
 
 	// printf("UNSIGNED WITH PRECISION");
 	// printf("\n");
+	// printf("\n");
 	// printf("%.1u", 1);
 	// printf("\n");
 	// printf("%.2u", 1);
@@ -293,6 +305,7 @@ int	main(void)
 	// printf("\n");
 
 	// printf("HEXA MAJ AND MIN WITH PRECISION");
+	// printf("\n");
 	// printf("\n");
 	// printf("%.1x", 0xa);
 	// printf("\n");
@@ -358,7 +371,277 @@ int	main(void)
 	// printf("\n");
 	// printf("%Xs%.5Xi%.0Xc%.Xp%.9Xu", 5, 55, 2, 0, 42);
 
+	printf("STRING AND POINTER, WIDTHS, PRECISIONS WITH - ");
+	printf("\n");
+	printf("\n");
+	printf("We %-s what we %8s, %-2s we %-20s", "do", "must", "because", "can");
+	printf("\n");
+	printf("%-9sScience!", "-42");
+	printf("\n");
+	printf("that's the way it %-20pis", "");
+	printf("\n");
+	printf("as soon as %-10possible", (void *) -1);
+	printf("\n");
+	printf("as soon as %-16peasible", (void *) (((long int)3 << 42) + 15));
+	printf("\n");
+	printf("thats %-psrobably not a good idea", (void *) 13);
+	printf("\n");
 
+	printf("D AND I, WIDTHS, PRECISIONS WITH - ");
+	printf("\n");
+	printf("\n");
+	printf("%-d", 0);
+	printf("\n");
+	printf("%-d", -10);
+	printf("\n");
+	printf("%-d", (int)-2147483648);
+	printf("\n");
+	printf("%-d", 2147483647);
+	printf("\n");
+	printf("%-10d", (int)-2147483648);
+	printf("\n");
+	printf("%-10d", 2147483647);
+	printf("\n");
+	printf("%-.6d", (int)-2147483648);
+	printf("\n");
+	printf("%-.7d", 2147483647);
+	printf("\n");
+	printf("%-1.10d", (int)-2147483648);
+	printf("\n");
+	printf("%-10.10d", 1);
+	printf("\n");
+	printf("%-10.5d", 5000);
+	printf("\n");
+	printf("%-10.15d", (int)-2147483648);
+	printf("\n");
+	printf("%-4.5d%d%4d%-10d-d5%-.3d", 300000, 400000, 500000, 600000, 700000);
+	printf("\n");
+	printf("%-4.5d%d%4d%-10d-d5%-.3d", 2147483647, 2141483647, 2141483647, 2141483647, 2141483647);
+	printf("\n");
+
+	printf("UNSIGNED, WIDTHS, PRECISIONS AND -");
+	printf("\n");
+	printf("\n");
+	printf("%-u", 0);
+	printf("\n");
+	printf("%-u", 10);
+	printf("\n");
+	printf("%-1u", -10);
+	printf("\n");
+	printf("%-1u", -5000);
+	printf("\n");
+	printf("%-1u", 2147483647);
+	printf("\n");
+	printf("%-10u", 2147483647);
+	printf("\n");
+	printf("%-.7u", 2147483647);
+	printf("\n");
+	printf("%-4.5u%u%4u%-10u-u5%-.3u", 300000, 400000, 500000, 600000, 700000);
+	printf("\n");
+
+	printf("HEXA MAJ/MIN, WITDHS, PRECISION, AND -");
+	printf("\n");
+	printf("\n");
+	printf("%-x", -10);
+	printf("\n");
+	printf("%-X", -10);
+	printf("\n");
+	printf("%-x", 2147483647);
+	printf("\n");
+	printf("%-X", 2147483647);
+	printf("\n");
+	printf("%-1x", 2147483647);
+	printf("\n");
+	printf("\n");
+	printf("%-10X", -10);
+	printf("\n");
+	printf("%-.7x", 2147483647);
+	printf("\n");
+	printf("%-.7X", 2147483647);
+	printf("\n");
+	printf("%-1.6x", 5000);
+	printf("\n");
+	printf("%-1.6X", 5000);
+	printf("\n");
+	printf("%-1.4x", -5000);
+	printf("\n");
+	printf("%-1.4X", -5000);;
+	printf("\n");
+	printf("%-10.5x", 2147483647);
+	printf("\n");
+	printf("%-10.5X", 2147483647);
+	printf("\n");
+	printf("%-15.5x", -5000);
+	printf("\n");
+	printf("%-15.5X", -5000);
+	printf("\n");
+	printf("%-4.5x%x%4x%-10x-x5%-.3x", 300000, 400000, 500000, 600000, 700000);
+	printf("\n");
+	printf("%-4.5X%X%4X%-10X-x5%-.3X", 300000, 400000, 500000, 600000, 700000);
+	printf("\n");
+	printf("%-4.5x%x%4x%-10x-x5%-.3x", -1, -1, -1, -1, -1);
+	printf("\n");
+	printf("%-4.5X%X%4X%-10X-x5%-.3X", -1, -1, -1, -1, -1);
+	printf("\n");
+
+	printf("D AND I, WITDH, PRECISION and 0");
+	printf("\n");
+	printf("\n");
+	printf("%01d", 0);
+	printf("\n");
+	printf("%01i", 0);
+	printf("\n");
+	printf("%020d", -42000);
+	printf("\n");
+	printf("%020i", -42000);
+	printf("\n");
+	printf("%030d", 2147483647);
+	printf("\n");
+	printf("%030i", 2147483647);
+	printf("\n");
+	printf("%030d", (int)-2147483648);
+	printf("\n");
+	printf("%030i", (int)-2147483648);
+	printf("\n");
+	printf("%012d, %20d, %2d, %42d", (int)-2147483648, 3, 30, -1);
+	printf("\n");
+	printf("%012i, %20i, %2i, %42i", (int)-2147483648, 3, 30, -1);
+	printf("\n");
+	printf("%01.d", 0);
+	printf("\n");
+	printf("%01.i", 0);
+	printf("\n");
+	printf("%01.0d", 0);
+	printf("\n");
+	printf("%01.0i", 0);
+	printf("\n");
+	printf("%010.20d", 42);
+	printf("\n");
+	printf("%010.20i", 42);
+	printf("\n");
+	printf("%020.20d", -42000);
+	printf("\n");
+	printf("%020.20i", -42000);
+	printf("\n");
+	printf("%014dc%020ds%02dx%0du", (int)-2147483648, 3, 30, -1);
+	printf("\n");
+	printf("%014ic%020is%02ix%0iu", (int)-2147483648, 3, 30, -1);
+	printf("\n");
+	printf("%0014.2d%020d%0002.d%000.5d", (int)-2147483648, 3, 30, -1);
+	printf("\n");
+	printf("%0014.2i%020i%0002.i%000.5i", (int)-2147483648, 3, 30, -1);
+	printf("\n");
+
+	printf("UNSIGNED, WIDTHS, PRECISIONS AND 0");
+	printf("\n");
+	printf("\n");
+	printf("%01u", 0);
+	printf("\n");
+	printf("%020u", -42000);
+	printf("\n");
+	printf("%030u", 2147483647);
+	printf("\n");
+	printf("%030u", -1);
+	printf("\n");
+	printf("%014uc%020us%02ux%0ui", -1, 3, 30, -1);
+	printf("\n");
+	printf("%03.0u", 0);
+	printf("\n");
+	printf("%01.3u", 4);
+	printf("\n");
+	printf("%042.42u", 42000);
+	printf("\n");
+	printf("%020.20u is how many tests are going to be made", 8000);
+	printf("\n");
+	printf("%014uc%020us%02ux%0ui", -1, 3, 30, -1);
+	printf("\n");
+
+	printf("HEXA MIN/MAJ WITH WIDTHS, PRECISION, AND 0");
+	printf("\n");
+	printf("\n");
+	printf("%01x", 0);
+	printf("\n");
+	printf("%01X", 0);
+	printf("\n");
+	printf("%020x", -42000);
+	printf("\n");
+	printf("%020X", -42000);
+	printf("\n");
+	printf("%030x", 2147483647);
+	printf("\n");
+	printf("%030X", 2147483647);
+	printf("\n");
+	printf("%030x", -1);
+	printf("\n");
+	printf("%030X", -1);
+	printf("\n");
+	printf("%014xc%020xs%02xx%0xi", -1, 3, 30, -1);
+	printf("\n");
+	printf("%014Xc%020Xs%02Xx%0Xi", -1, 3, 30, -1);
+	printf("\n");
+	printf("%03.0x", 0);
+	printf("\n");
+	printf("%03.0X", 0);
+	printf("\n");
+	printf("%01.3x", 4);
+	printf("\n");
+	printf("%01.3X", 4);
+	printf("\n");
+	printf("%042.42x", 42000);
+	printf("\n");
+	printf("%042.42X", 42000);
+	printf("\n");
+	printf("%020.20x is how many tests are going to be made", 8000);
+	printf("\n");
+	printf("%020.20X is how many tests are going to be made", 8000);
+	printf("\n");
+	printf("%014xc%020xs%02xx%0xi", -1, 3, 30, -1);
+	printf("\n");
+	printf("%014Xc%020Xs%02Xx%0Xi", -1, 3, 30, -1);
+	printf("\n");
+
+	printf("HEXA MIN/MAJ WITH #");
+	printf("\n");
+	printf("\n");
+	printf("%#x", 0);
+	printf("\n");
+	printf("%#X", 0);
+	printf("\n");
+	printf("%#x", -4);
+	printf("\n");
+	printf("%#X", -4);
+	printf("\n");
+	printf("%#x", -42000);
+	printf("\n");
+	printf("%#X", -42000);
+	printf("\n");
+	printf("wait for it... %#x", 42);
+	printf("\n");
+	printf("wait for it... %#X", 42);
+	printf("\n");
+	printf("%#xp", 2147483647);
+	printf("\n");
+	printf("%#Xp", 2147483647);
+	printf("\n");
+	printf("%#xd", -1);
+	printf("\n");
+	printf("%#Xd", -1);
+	printf("\n");
+	printf("%#x, %x, %x, %x", -1, 3, 30, -1);
+	printf("\n");
+	printf("%#X, %X, %X, %X", -1, 3, 30, -1);
+	printf("\n");
+	printf("%#xc%#xs%#xX%#xi", -1, 3, 30, -1);
+	printf("\n");
+	printf("%#Xc%#Xs%#XX%#Xi", -1, 3, 30, -1);
+	printf("\n");
+	printf("c%#x-i", 42000);
+	printf("\n");
+	printf("c%#X-i", 42000);
+	printf("\n");
+	printf("wait for it... %#xp", 42);
+	printf("\n");
+	printf("wait for it... %#Xp", 42);
 	printf("\n");
 
 	printf("\n");
@@ -376,33 +659,7 @@ int	main(void)
 	printf("\n");
 
 	printf("\n");
-
-	printf("\n");
-
-	printf("\n");
-
-	printf("\n");
-
-	printf("\n");
-
-	printf("\n");
-
-	printf("\n");
-
-	printf("\n");
-
-	printf("\n");
-
-	printf("\n");
-
-	printf("\n");
-
-	printf("\n");
-
-	printf("\n");
-
-	printf("\n");
-
+	
 	printf("\n");
 
 	printf("\n");
