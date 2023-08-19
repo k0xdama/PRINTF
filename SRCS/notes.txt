@@ -18,6 +18,8 @@ FICHIERS SOURCES :
 -ft_printf.c
 
 ------------------------------------------------------------------------------
-TEST DE CAS PARTICULIER :
-
-%c = NULL -> 
+TDL :
+- ecrire ATOI_BASE et/ou PUTNBR_BASE ? 0
+- faire ft_printf.h 0
+- schema excalidraw quel flag pour quel spécificateur + combinaison 0
+- finir schema estimation répartition fichier sources 0
