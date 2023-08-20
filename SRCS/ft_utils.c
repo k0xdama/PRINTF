@@ -6,12 +6,13 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 09:04:01 by pmateo            #+#    #+#             */
-/*   Updated: 2023/08/19 04:16:17 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/08/20 05:43:36 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
+#include "../INCLUDES/ft_printf.h"
 
 int ft_putchar_with_ret(char c)
 {
@@ -55,6 +56,23 @@ int	ft_putnbr(int nb)
     return (len);
 }
 
+void	up_struct(t_flags f_bool, t_flags *f_fields)
+{
+	f_fields->width_field = malloc(sizeof(int));
+	f_fields->zero_field = malloc(sizeof(int));
+	f_fields->tsix_field = malloc(sizeof(int));
+	f_fields->dot_field = malloc(sizeof(int));
+	*f_fields->width_field = 0;
+	*f_fields->zero_field = 0;
+	*f_fields->tsix_field = 0;
+	*f_fields->dot_field = 0;
+	f_bool.zero = 0;
+	f_bool.h_tag = 0;
+	f_bool.space = 0;
+	f_bool.plus = 0;
+	f_bool.tsix = 0;
+	f_bool.dot = 0;
+}
 int main(void)
 {
     int nb = -424266;

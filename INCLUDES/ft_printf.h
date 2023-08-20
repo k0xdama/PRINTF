@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 03:45:42 by pmateo            #+#    #+#             */
-/*   Updated: 2023/08/20 02:02:03 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/08/20 05:40:40 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 typedef	struct s_flags
 {
@@ -24,12 +25,12 @@ typedef	struct s_flags
 	int			*zero_field;
 	int			*tsix_field;
 	int			*dot_field;
-	int			*zero;
-	int			*h_tag;
-	int			*space;
-	int			*plus;
-	int			*tsix;
-	int			*dot;
+	int			zero;
+	int			h_tag;
+	int			space;
+	int			plus;
+	int			tsix;
+	int			dot;
 }	t_flags
 
 
@@ -45,6 +46,7 @@ int				ft_hexalen(unsigned int nb)
 int				ft_putchar_with_ret(char c);
 int				ft_putnbr(int nb);
 int				ft_atoi(char *str);
+int				up_struct(t_flags *f, t_flags *f_fields);
 
 
 
