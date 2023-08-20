@@ -1,0 +1,36 @@
+########################## NOTES ABOUT PRINTF PROJECT ########################
+
+%c = char (putchar)
+%s = string (printstr)
+%d = entier(putnbr, itoa)
+%i = entier(putnbr, itoa)
+%u = unsigned int(uitoa)
+%x = nombre base 16 lettres minuscule (exo pool base)
+%X = nombre base 16 lettres majuscule (exo pool base)
+%% = signe pourcentage
+%p = affiche un pointeur en hexadécimal (?)
+------------------------------------------------------------------------------
+FICHIERS SOURCES :
+-ft_hexa.c
+-ft_nbr.c (putnbr ; 1)
+-ft_ptr.c
+-ft_str.c (strlen, putstr, putchar ; 3)
+-ft_printf.c
+
+------------------------------------------------------------------------------
+TDL :
+- ecrire ATOI_BASE et/ou PUTNBR_BASE ? 0
+- faire ft_printf.h 0
+- schema excalidraw quel flag pour quel spécificateur + combinaison 0
+- finir schema estimation répartition fichier sources 0
+
+
+
+
+-----------------------------------------------------------------------------
+PATHFINDER :
+- Comme le spécificateurs de conversion se trouve tout le temps en dernier, pars du principe que tu dois en premier temps vérifier si il y a la présence d'un flag après le % et agir en conséquence, l'impression de l'argument du au spécificateurs viens dans un second temps et ne peux pas se faire tant que les flags associé a la conversion n'ont pas été enregistré dans la structure.
+- Pour la LARGEUR DE CHAMPS minimale, si un chiffre autre que 0 est trouvé après le % tu dois utiliser une implémentation refaites pour ce projet d'ATOI pour enregistrer le nombre complet qui indiquera la largeur dans la structure, sans prendre ce qui peut potentiellement se trouver derrière. Ne prends pas en compte le signe car elle ne peut pas être négative.
+- Tu va devoir reflechir comment peut tu suivre l'avancé dans la chaine de caractère selon ce que tu as deja traité au sein du fichiers ft_printf, au dela de bien sûr l'index.
+- Tout les flags doivent être traité de deux manière différentes selon leurs spécificités, pour #' ' et + simplement marquer leurs présences dans la structure, pour 0-. atoi sera utilisé. Sur 0 car nous avons besoin de connaitre le nombre de 0 à print pour combler le champs minimal de largeur. Sur - car pour cadrer l'argument à gauche nous avons aussi besoin de la largeur de champs minimal. Sur . car dans notre cas il ne sera effectif que sur les chaines de caractères et nous avons besoin de savoir combien de caractère nous avons à imprimer. Toutes ces informations doivent être présente dans la structure ainsi que leur présence tout comme les autres flag.
+- Si les flag 0 et - apparaissent, le 0 est ignoré. Si une precision est donné sur une convertion numérique le 0 est ignoré
