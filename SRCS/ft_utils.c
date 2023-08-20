@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* *****œ:x********************************************************************* */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
@@ -13,11 +13,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "../INCLUDES/ft_printf.h"
-
-int ft_putchar_with_ret(char c)
-{
-    return (write(1, &c, 1));
-}
 
 int ft_nbrlen(int nb)
 {
@@ -54,6 +49,11 @@ int	ft_putnbr(int nb)
 		ft_putnbr(nbl % 10);
 	}
     return (len);
+}
+
+int	ft_atoi(char *str)
+{
+	
 }
 
 void	up_struct(t_flags f_bool, t_flags *f_fields)

@@ -14,7 +14,7 @@
 
 int	main(void)
 {
-	printf("%030d", 2147483647);
+	printf("%30d", 2147483647);
 	printf("\n");
 	printf("%-30d", 2147483647);
 	printf("\n");
