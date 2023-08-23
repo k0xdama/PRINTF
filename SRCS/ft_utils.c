@@ -56,23 +56,36 @@ int	ft_atoi(char *str)
 	
 }
 
-void	up_struct(t_flags f_bool, t_flags *f_fields)
+int	is_flags(char c, char *str)
 {
-	f_fields->width_field = malloc(sizeof(int));
-	f_fields->zero_field = malloc(sizeof(int));
-	f_fields->tsix_field = malloc(sizeof(int));
-	f_fields->dot_field = malloc(sizeof(int));
-	*f_fields->width_field = 0;
-	*f_fields->zero_field = 0;
-	*f_fields->tsix_field = 0;
-	*f_fields->dot_field = 0;
-	f_bool.zero = 0;
-	f_bool.h_tag = 0;
-	f_bool.space = 0;
-	f_bool.plus = 0;
-	f_bool.tsix = 0;
-	f_bool.dot = 0;
+	int	i;
+	int ret;
+
+	i = 0;
+	ret = 0;
+	while (str[i])
+	{
+		if (c == str[i])
+			ret++;
+		i++;
+	}
+	return (ret);
 }
+
+void	up_struct(t_flags *flags)
+{
+	flags->width_field = 0;
+	flags->zero_field = 0;
+	flags->tsix_field = 0;
+	flags->dot_field = 0;
+	flags->zero = 0;
+	flags->htag = 0;
+	flags->space = 0;
+	flags->plus = 0;
+	flags->tsix = 0;
+	flags->dot = 0;
+}
+
 int main(void)
 {
     int nb = -424266;

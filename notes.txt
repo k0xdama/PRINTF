@@ -22,10 +22,11 @@ FICHIERS SOURCES :
 
 ------------------------------------------------------------------------------
 TDL :
-- ecrire ATOI_BASE et/ou PUTNBR_BASE ? 0
+- ecrire ATOI et PUTNBR_BASE ? 0
 - faire ft_printf.h 0
 - schema excalidraw quel flag pour quel spécificateur + combinaison 0
 - finir schema estimation répartition fichier sources 0
+- finir la fonction flags specifiers en utilisant le fichier de test que tu as écris pourdefinir l'ordre possible des flags et ceux qui seront suivis d'un nombre à garder
 
 
 

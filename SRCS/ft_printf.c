@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:38 by pmateo            #+#    #+#             */
-/*   Updated: 2023/08/15 02:22:12 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/08/23 04:39:20 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,62 +15,75 @@
 #include <stdio.h>
 #include "../INCLUDES/ft_printf.h"
 
-int	flags_specifiers(const char *str)
-
-
-int     conv_specifiers(const char *str, t_flags f_bool, f_flags *f_fields))
+void	flags_specifiers(const char *str, t_flags flags)
 {
-	size_t  i;
-
-        while(str[i])
-        {
-                if(str[i] == '%')
-                {
-                        if(str[i+1] == 'd' || str[i+1] == 'i')
-                                ft_putnbr();
-                        else if (str[i+1] == 'u')
-                                ft_uputnbr();
-                        else if (str[i+1] == 'c')
-                                ft_putchar();
-                        else if (str[i+1] == 's')
-                                ft_putstr();
-                        else if (str[i+1] == 'x' || str[i+1] == 'X')
-                                ft_puthex();
-                        else if (str[i+1] == 'p')
-                                ft_putptr();
-                        else if (str[i+1] == '%')
-                                ft_putpercent();
-                }
-                write(1, &str[i], 1);
-                i++;
-        }
-        return (i);
+	if (*str )
 }
 
+
+int     conv_specifiers(const char *str, t_flags flags, va_list args)
+{
+	int	printed;
+	
+	printed = 0;
+	if (*str == 'c')
+		printed += ft_printchar(va_arg(args, char), flags);
+	else if (*str == 's')
+		printed += ft_printstr(va_arg(args, char *), flags);
+	else if (*str == 'p')
+		printed += ft_printptr(va_arg(args, void *), flags);
+	else if (*str == 'd' || str[i] == 'i')
+		printed += ft_printnbr(va_arg(args, int), flags);
+	else if (*str == 'u')
+		printed += ft_printunbr(va_arg(args, int), flags);
+	else if (*str == 'x' || str[i] == 'X')
+		printed += ft_printhexa(va_arg(args, int), flags);
+	else if (*str == '%')
+		printed += ft_printchar('%', flags);	
+	return (printed);
+}
+
+int	pathfinder(const char *str, int *i, va_list args)
+{
+	int	printed;
+	t_flags *flags;
+	
+	printed = 0;
+	up_struct(&flags);
+	(*i++);
+	if (is_flags(str[(*i)], "123456789"))
+		flags->width_field += ft_atoi(str+(*i), i);
+	while (is_flags(str[(*i)], "0-.# +"))
+	{
+		flags_specifiers(str+(*i), *flags);
+		(*i++);
+	}
+	printed += conv_specifiers(str+(*i), *flags, args);
+	return (printed);
+}
 
 
 int ft_printf(const char *str, ...)
 {
 	size_t  i;
 	int	printed;
-	t_flags	f_bool;
-	t_flags *f_fields;
+	va_list args;
 
 	i = 0;
 	printed = 0;
+	va_start(args, str);
 	while(str[i])
 	{
 		if(str[i] == '%')
 		{
-			if(is_flags(str[i+1])
-				printed += flags_specifiers((str+(i+1)), f_bool, f_fields);
-			else
-				printed += conv_specifiers((str+(i+1)));
+			printed += pathfinder(str, &i, args);
 		}
 		else
-			
+			printed += ft_putchar_with_ret(str[i]);
+		i++;
 	}
-
+	va_end(args);
+	return (printed);
 }
 
 
