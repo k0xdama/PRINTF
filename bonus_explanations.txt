@@ -2,7 +2,7 @@
 QUESTION : & printf ne compile pas avec un flag comme l'espace ou le tiret qui est répété, que dois-je y faire ?
 
 - LARGEUR MINIMAL DU CHAMPS D'IMPRESSION : Entre % et le spécificateur de conversion je peux placer un nombre qui précise la largeur minimum du champ d'impression. Si un 0 se trouve juste après % la largeur de champ est complété par des '0'.(width)
-- PRECISION (.) : Entre % et le spécificateur de conversion peut se trouver un point avec un nombre derrière, selon le spécificateur les significations diffère. Pour une %s le nombre précise le nombre maximum de caractère à imprimer. Pour un entier, le nombre minimum de chiffres à imprimer (des 0 seront rajoutés en tête pour remplir le champ).
+- PRECISION (.) : Entre % et le spécificateur de conversion peut se trouver un point avec un nombre derrière, selon le spécificateur les significations diffère. Pour une %s le nombre précise le nombre maximum de caractère à imprimer. Pour un entier, le nombre minimum de chiffres à imprimer (des 0 seront rajoutés en tête pour remplir le champ, si le précision est supérieur au nombre de chiffres dans l'argument).
 - DRAPEAU (-) : Cadre l'argument converti à gauche, si une largeur de champ est défini elle sera quand même effective.
 - DRAPEAU (#) : = Rajouter 0x et 0X sur %x ou %X, si le résultat est non-nul.
 - DRAPEAU (' ') : Si le premier caractère n'est pas un signe un espace sera ajouté, de manière a ce que les nombres soient alignés.

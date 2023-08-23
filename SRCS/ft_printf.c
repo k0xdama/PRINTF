@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:38 by pmateo            #+#    #+#             */
-/*   Updated: 2023/08/23 04:39:20 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/08/23 19:44:38 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,32 @@
 #include <stdio.h>
 #include "../INCLUDES/ft_printf.h"
 
-void	flags_specifiers(const char *str, t_flags flags)
+void	flags_specifiers(const char *str, t_flags *flags)
 {
-	if (*str )
+	if (is_flags(*str, "0-+ #"))
+	{
+		if (*str == '0')
+			flags->zero = 1;
+		else if (*str == '-')
+			flags->tsix = 1;
+		else if (*str == '+')
+			flags->plus = 1;
+		else if (*str == ' ')
+			flags->space = 1;
+		else if (*str == '#')
+			flags->htag = 1;
+		if (*str+1 >= 1 && *str+1 <= 9)
+			flags->width_field = ft_atoi(str+1);
+	}
+	else if (*str == '.')
+	{
+		flags->dot = 1;
+		flags->dot_field = ft_atoi(str+1);
+	}	
 }
 
 
-int     conv_specifiers(const char *str, t_flags flags, va_list args)
+int     conv_specifiers(const char *str, t_flags *flags, va_list args)
 {
 	int	printed;
 	
@@ -32,11 +51,11 @@ int     conv_specifiers(const char *str, t_flags flags, va_list args)
 		printed += ft_printstr(va_arg(args, char *), flags);
 	else if (*str == 'p')
 		printed += ft_printptr(va_arg(args, void *), flags);
-	else if (*str == 'd' || str[i] == 'i')
+	else if (*str == 'd' || *str == 'i')
 		printed += ft_printnbr(va_arg(args, int), flags);
 	else if (*str == 'u')
 		printed += ft_printunbr(va_arg(args, int), flags);
-	else if (*str == 'x' || str[i] == 'X')
+	else if (*str == 'x' || *str == 'X')
 		printed += ft_printhexa(va_arg(args, int), flags);
 	else if (*str == '%')
 		printed += ft_printchar('%', flags);	
@@ -52,13 +71,13 @@ int	pathfinder(const char *str, int *i, va_list args)
 	up_struct(&flags);
 	(*i++);
 	if (is_flags(str[(*i)], "123456789"))
-		flags->width_field += ft_atoi(str+(*i), i);
+		flags->width_field += ft_atoi(str+(*i));
 	while (is_flags(str[(*i)], "0-.# +"))
 	{
-		flags_specifiers(str+(*i), *flags);
+		flags_specifiers(str+(*i), &flags);
 		(*i++);
 	}
-	printed += conv_specifiers(str+(*i), *flags, args);
+	printed += conv_specifiers(str+(*i), &flags, args);
 	return (printed);
 }
 

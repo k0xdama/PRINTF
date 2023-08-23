@@ -19,6 +19,7 @@ int	main(void)
 	printf("\n");
 	printf("%5chis paragraph is indented", 't');
 	printf("\n");
+	printf("\n");
 
 	printf("STRING WITH WIDTH");
 	printf("\n");
@@ -38,6 +39,7 @@ int	main(void)
 	printf("\n");
 	printf("%sc%13sd%42sp%3sx", "a, b and c", " are letters", " of the", " alphabet");
 	printf("\n");
+	printf("\n");
 
 	printf("POINTERS WITH WIDTH");
 	printf("\n");
@@ -56,6 +58,7 @@ int	main(void)
 	printf("%3p is the address", (void *)0);
 	printf("\n");
 	printf("%8p is the address", (void *)0);
+	printf("\n");
 	printf("\n");
 
 	printf("INT WITH WIDTH");
@@ -79,6 +82,7 @@ int	main(void)
 	printf("\n");
 	printf("%14dc%20ds%2dx%du", (int)-2147483648, 3, 30, -1);
 	printf("\n");
+	printf("\n");
 
 	printf("%%I WITH WIDTH");
 	printf("\n");
@@ -101,6 +105,7 @@ int	main(void)
 	printf("\n");
 	printf("%14ic%20is%2ix%iu", (int)-2147483648, 3, 30, -1);
 	printf("\n");
+	printf("\n");
 
 	printf("UNSIGNED WITH WIDTH");
 	printf("\n");
@@ -114,6 +119,7 @@ int	main(void)
 	printf("the biggest unsigned int is %11u", (unsigned int)-1);
 	printf("\n");
 	printf("Here are some numbers: %1u%2u%5u%3u%9u and %ui", 11, (unsigned int)-1, 2, 200, 3, 10);
+	printf("\n");
 	printf("\n");
 
 	printf("HEXA MIN AND MAJ WITH WIDTH");
@@ -154,7 +160,9 @@ int	main(void)
 	printf("%1xis doomed%2xpost%9xX args", (unsigned int)-1, 0xf0b1a, 7654321);
 	printf("\n");
 	printf("%1Xis doomed%2Xpost%9Xx args", (unsigned int)-1, 0xf0b1a, 7654321);
-
+	printf("\n");
+	printf("\n");
+	
 	printf("STRING WITH PRECISION");
 	printf("\n");
 	printf("\n");
@@ -190,6 +198,7 @@ int	main(void)
 	printf("%1.s", "21-school.ru");
 	printf("\n");
 	printf("%10.1s", "21-school.ru");
+	printf("\n");
 	printf("\n");
 
 	printf("%%d AND %%i WITH PRECISION");
@@ -255,6 +264,7 @@ int	main(void)
 	printf("\n");
 	printf("%.4i%.2i%.20i%.0i%.0i%.i%.i%.i", 127, 0, 1023, 0, (int)-2147483648, 0, 1, (int)-2147483648);
 	printf("\n");
+	printf("\n");
 
 	printf("UNSIGNED WITH PRECISION");
 	printf("\n");
@@ -303,7 +313,8 @@ int	main(void)
 	printf("\n");
 	printf("%us%.5ui%.0uc%.up%.9ux", 5, 55, 2, 0, 42);
 	printf("\n");
-
+	printf("\n");
+	
 	printf("HEXA MAJ AND MIN WITH PRECISION");
 	printf("\n");
 	printf("\n");

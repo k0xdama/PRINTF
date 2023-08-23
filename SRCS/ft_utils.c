@@ -56,6 +56,24 @@ int	ft_atoi(char *str)
 	
 }
 
+
+char	*ft_strchr(const char *str, int c)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == (char)c)
+			return ((char *)str + i);
+		else
+			i++;
+	}
+	if (str[i] == c)
+		return ((char *)str + i);
+	return (NULL);
+}
+
 int	is_flags(char c, char *str)
 {
 	int	i;
@@ -75,8 +93,9 @@ int	is_flags(char c, char *str)
 void	up_struct(t_flags *flags)
 {
 	flags->width_field = 0;
-	flags->zero_field = 0;
-	flags->tsix_field = 0;
+	// flags->zero_field = 0;
+	// flags->tsix_field = 0;
+	// flags->plus_field = 0;
 	flags->dot_field = 0;
 	flags->zero = 0;
 	flags->htag = 0;
