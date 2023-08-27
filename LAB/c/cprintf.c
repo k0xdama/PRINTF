@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:39:53 by pmateo            #+#    #+#             */
-/*   Updated: 2023/08/23 23:40:37 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/08/24 20:08:36 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,13 @@ int	ft_cprintf(const char *str, ...)
 {
 	int	printed;
 	int i;
-	va_list	args;
 	t_flags flags;
+	va_list	args;
 	
 	printed = 0;
 	i = 0;
-	va_start(args, str);
 	up_struct(&flags);
+	va_start(args, str);
 	while (str[i])
 	{
 		if (str[i] == '%')
