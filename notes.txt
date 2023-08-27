@@ -27,7 +27,7 @@ TDL :
 - schema excalidraw quel flag pour quel spécificateur + combinaison 0
 - finir schema estimation répartition fichier sources 0
 - finir la fonction flags specifiers en utilisant le fichier de test que tu as écris pourdefinir l'ordre possible des flags et ceux qui seront suivis d'un nombre à garder X
-- LAB : xX (0) - p (0) - c (1) - s (0) - di (0) - u (0)
+- LAB : xX (0) - p (0) - c (1) - s (1) - di (0) - u (0)
 
 
 

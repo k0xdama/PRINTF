@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 01:05:19 by pmateo            #+#    #+#             */
-/*   Updated: 2023/08/26 19:32:19 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/08/27 19:24:37 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int	main(void)
 	// printf("%#13d", 42);
 	// printf("\n");
 	// ret = printf("%-20c", '#');
+	// printf("\n");
+	// ret = printf("%-.4s", "myboy");
+	// printf("\n");
+	ret = printf("% 05d", 42);
 	printf("\n");
-	ret = printf("%-.4s", "myboy");
-	printf("\n");
-	printf("%d", ret);
+	printf("%d\n", ret);
 }

@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:38 by pmateo            #+#    #+#             */
-/*   Updated: 2023/08/23 19:44:38 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/08/27 18:27:01 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ int	pathfinder(const char *str, int *i, va_list args)
 	
 	printed = 0;
 	up_struct(&flags);
-	(*i++);
+	(*i)++;
 	if (is_flags(str[(*i)], "123456789"))
 		flags->width_field += ft_atoi(str+(*i));
 	while (is_flags(str[(*i)], "0-.# +"))
 	{
 		flags_specifiers(str+(*i), &flags);
-		(*i++);
+		(*i)++;
 	}
 	printed += conv_specifiers(str+(*i), &flags, args);
 	return (printed);
