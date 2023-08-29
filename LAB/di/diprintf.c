@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   diprintf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: u4s2e0r <u4s2e0r@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:18:15 by pmateo            #+#    #+#             */
-/*   Updated: 2023/08/27 19:16:35 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/08/29 18:41:34 by u4s2e0r          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,39 @@ int	ft_putnbr(int nb)
     return (len);
 }
 
-int pathfinder(const char *str, va_list args, t_flags flags, int *i)
+int printnbr(int nbr, t_flags *flags)
+{
+    int printed;
+
+    printed = 0;
+
+}
+
+int pathfinder(const char *str, va_list args, t_flags *flags, int *i)
 {
     int printed;
 
     printed = 0;
     (*i)++;
-    
+    if (str[(*i)] == '-' || str[(*i)+1] == '-')
+        flags->tsix = 1;
+    if (str[(*i)] == '+' || str[(*i)+1] == '+')
+        flags->plus = 1;
+    (*i)++;
+    if (str[(*i)++] == '0')
+        flags->zero = 1;
+    flags->width_field = ft_atoi(str+(*i));
+    while (str[(*i)] >= '0' && str[(*i)] <= '9')
+        (*i)++;
+    if (str[(*i)] == '.')
+    {
+        flags->dot = 1;
+        flags->dot_field = ft_atoi(str+(*i));
+    }
+    while (str[(*i)] >= '0' && str[(*i)] <= '9')
+        (*i)++;
+    printed += printnbr(va_arg(args, int), flags);
+    return (printed);
 }
 
 int ft_diprintf(const char *str, ...)
