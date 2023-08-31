@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   diprintf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: u4s2e0r <u4s2e0r@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:18:15 by pmateo            #+#    #+#             */
-/*   Updated: 2023/08/29 18:41:34 by u4s2e0r          ###   ########.fr       */
+/*   Updated: 2023/08/31 02:42:15 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,17 @@ int ft_putchar_with_ret(char c)
     return(write(1, &c, 1));
 }
 
-int ft_strlen(char *str)
+int ft_nbrlen(int nbr)
 {
     int i;
 
     i = 0;
-    while(str[i])
-        i++;
-    return (i);
+	while (nbr != 0)
+	{
+		nbr /= 10;
+		i++;
+	}
+	return (i);
 }
 
 int	ft_atoi(const char *str)
@@ -56,7 +59,7 @@ int	ft_atoi(const char *str)
 	int	num;
 	
 	num = 0;
-	while ((*str <= '0' || *str >= '9') && (*str))
+	while ((*str <= '0' || *str > '9') && (*str))
 		str++;
 	while (*str >= '0' && *str <= '9')
 	{
@@ -66,20 +69,20 @@ int	ft_atoi(const char *str)
 	return (num);
 }
 
-int	ft_putnbr(int nb)
+int	ft_putnbr(int nbr)
 {
 	long	nbl;
     int     len;
     
-    len = ft_nbrlen(nb);
-	nbl = nb;
+    len = ft_nbrlen(nbr);
+	nbl = nbr;
 	if (nbl < 0)
 	{
 		write(1, "-", 1);
 		nbl *= -1;
 	}
 	if (nbl >= 0 && nbl <= 9)
-		ft_putchar(nbl + 48);
+		ft_putchar_with_ret(nbl + 48);
 	if (nbl > 9)
 	{
 		ft_putnbr(nbl / 10);
@@ -88,12 +91,57 @@ int	ft_putnbr(int nb)
     return (len);
 }
 
+int	print_width_and_put(int nbr, t_flags *flags, int *precision, int *width_size)
+{
+	int printed;
+
+	printed = 0;
+	if (flags->tsix == 1)
+	{
+		if (flags->plus == 1)
+			printed += ft_putchar_with_ret('+');
+		while ((*precision)-- != 0)
+			printed += ft_putchar_with_ret('0');
+		printed += ft_putnbr(nbr);
+		while ((*width_size)-- != 0)
+			printed += ft_putchar_with_ret(' ');
+	}
+	else
+	{
+		if (flags->zero == 1 && flags->dot == 0)
+		{
+			while ((*width_size)-- != 0)
+				printed += ft_putchar_with_ret('0');
+		}
+		else
+		{
+			while ((*width_size)-- != 0)
+				printed += ft_putchar_with_ret(' ');
+		}
+		if (flags->plus == 1)
+			printed += ft_putchar_with_ret('+');
+		while ((*precision)-- != 0)
+			printed += ft_putchar_with_ret('0');
+		printed += ft_putnbr(nbr);
+	}
+	return (printed);
+}
+
 int printnbr(int nbr, t_flags *flags)
 {
     int printed;
+	int nbrlen;
+	int precision;
+	int width_size;
 
     printed = 0;
-
+	nbrlen = ft_nbrlen(nbr);
+	precision = flags->dot_field;
+	if (flags->dot == 1 && precision > nbrlen)
+		precision -= nbrlen;
+	width_size = flags->width_field - (nbrlen + precision + flags->plus);
+	printed += print_width_and_put(nbr, flags, &precision, &width_size);
+	return (printed);
 }
 
 int pathfinder(const char *str, va_list args, t_flags *flags, int *i)
@@ -109,10 +157,10 @@ int pathfinder(const char *str, va_list args, t_flags *flags, int *i)
     (*i)++;
     if (str[(*i)++] == '0')
         flags->zero = 1;
-    flags->width_field = ft_atoi(str+(*i));
+    flags->width_field = ft_atoi(str);
     while (str[(*i)] >= '0' && str[(*i)] <= '9')
         (*i)++;
-    if (str[(*i)] == '.')
+    if (str[(*i)++] == '.')
     {
         flags->dot = 1;
         flags->dot_field = ft_atoi(str+(*i));
@@ -147,6 +195,10 @@ int ft_diprintf(const char *str, ...)
 
 int main(void)
 {
-    
+    int ret = 0;
+	int nbr = 42;
+	ret = ft_diprintf("%+07d", nbr);
+	printf("\n");
+	printf("ret = %d\n", ret);
 }
 
