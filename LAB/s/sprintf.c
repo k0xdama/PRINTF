@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 19:57:23 by pmateo            #+#    #+#             */
-/*   Updated: 2023/08/26 19:42:33 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/02 19:47:21 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,11 @@ int	ft_putstr(const char *str, int strlen)
 	return (i);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, int *i)
 {
 	int	num;
 	
 	num = 0;
-	while ((*str <= '0' || *str >= '9') && (*str))
-		str++;
 	while (*str >= '0' && *str <= '9')
 	{
 		num = num * 10 + (*str - 48);
@@ -106,13 +104,13 @@ int	pathfinder(const char *str, va_list args, t_flags *flags, int *i)
 		flags->tsix = 1;
 		(*i)++;
 	}
-	flags->width_field = ft_atoi(str);
+	flags->width_field = ft_atoi(str, i);
 	while (str[(*i)] >= '0' && str[(*i)] <= '9')
 		(*i)++;
 	if (str[(*i)++] == '.')
 	{
 		flags->dot = 1;
-		flags->dot_field = ft_atoi(str+(*i));
+		flags->dot_field = ft_atoi(str, i);
 		while (str[(*i)] >= '0' && str[(*i)] <= '9')
 			(*i)++;
 	}
