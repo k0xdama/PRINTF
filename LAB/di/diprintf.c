@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:18:15 by pmateo            #+#    #+#             */
-/*   Updated: 2023/08/31 02:42:15 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/02 04:35:54 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,15 @@ int ft_nbrlen(int nbr)
 	return (i);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, int *i)
 {
 	int	num;
 	
 	num = 0;
-	while ((*str <= '0' || *str > '9') && (*str))
-		str++;
-	while (*str >= '0' && *str <= '9')
+	while (str[(*i)] >= '0' && str[(*i)] <= '9')
 	{
-		num = num * 10 + (*str - 48);
-		str++;
+		num = num * 10 + (str[(*i)] - 48);
+		(*i)++;
 	}
 	return (num);
 }
@@ -108,6 +106,8 @@ int	print_width_and_put(int nbr, t_flags *flags, int *precision, int *width_size
 	}
 	else
 	{
+		if (flags->plus == 1)
+			printed += ft_putchar_with_ret('+');
 		if (flags->zero == 1 && flags->dot == 0)
 		{
 			while ((*width_size)-- != 0)
@@ -118,8 +118,6 @@ int	print_width_and_put(int nbr, t_flags *flags, int *precision, int *width_size
 			while ((*width_size)-- != 0)
 				printed += ft_putchar_with_ret(' ');
 		}
-		if (flags->plus == 1)
-			printed += ft_putchar_with_ret('+');
 		while ((*precision)-- != 0)
 			printed += ft_putchar_with_ret('0');
 		printed += ft_putnbr(nbr);
@@ -139,7 +137,9 @@ int printnbr(int nbr, t_flags *flags)
 	precision = flags->dot_field;
 	if (flags->dot == 1 && precision > nbrlen)
 		precision -= nbrlen;
-	width_size = flags->width_field - (nbrlen + precision + flags->plus);
+	width_size = flags->width_field - (nbrlen + precision + flags->plus + flags->space);
+	if (flags->space == 1)
+		printed += ft_putchar_with_ret(' ');
 	printed += print_width_and_put(nbr, flags, &precision, &width_size);
 	return (printed);
 }
@@ -150,24 +150,25 @@ int pathfinder(const char *str, va_list args, t_flags *flags, int *i)
 
     printed = 0;
     (*i)++;
-    if (str[(*i)] == '-' || str[(*i)+1] == '-')
+    if (str[(*i)] == '-' || str[(*i)+1] == '-' || str[(*i)+2] == '-')
         flags->tsix = 1;
-    if (str[(*i)] == '+' || str[(*i)+1] == '+')
+    if (str[(*i)] == '+' || str[(*i)+1] == '+' || str[(*i)+2] == '+')
         flags->plus = 1;
-    (*i)++;
-    if (str[(*i)++] == '0')
+	if ((str[(*i)] == ' ' || str[(*i)+1] == ' ') && (flags->plus != 1))
+		flags->space = 1;
+    while (str[(*i)] == '+' || str[(*i)] == '-' || str[(*i)] == ' ')
+		(*i)++;
+    if (str[(*i)] == '0')
         flags->zero = 1;
-    flags->width_field = ft_atoi(str);
-    while (str[(*i)] >= '0' && str[(*i)] <= '9')
-        (*i)++;
-    if (str[(*i)++] == '.')
+    flags->width_field = ft_atoi(str, i);
+    if (str[(*i)] == '.')
     {
         flags->dot = 1;
-        flags->dot_field = ft_atoi(str+(*i));
+		(*i)++;
+        flags->dot_field = ft_atoi(str, i);
     }
-    while (str[(*i)] >= '0' && str[(*i)] <= '9')
-        (*i)++;
     printed += printnbr(va_arg(args, int), flags);
+	(*i)++;
     return (printed);
 }
 
@@ -186,8 +187,10 @@ int ft_diprintf(const char *str, ...)
         if (str[i] == '%')
             printed += pathfinder(str, args, &flags, &i);
         else
+		{
             printed += ft_putchar_with_ret(str[i]);
-        i++;
+        	i++;
+		}
     }
     va_end(args);
     return(printed);
@@ -197,7 +200,7 @@ int main(void)
 {
     int ret = 0;
 	int nbr = 42;
-	ret = ft_diprintf("%+07d", nbr);
+	ret = ft_diprintf("%- 07d", nbr);
 	printf("\n");
 	printf("ret = %d\n", ret);
 }
