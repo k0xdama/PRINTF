@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unittestprintf.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: u4s2e0r <u4s2e0r@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 01:05:19 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/02 20:34:32 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/04 01:36:01 by u4s2e0r          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ int	main(void)
 	// printf("\n");
 	// ret = printf("%- 07d", 42);
 	// printf("\n");
-	ret = printf("%-8.3u", 42);
+	// ret = printf("%-8.3u", 42);
+	// printf("\n");
+	ret = printf("%#-8x", 42);
 	printf("\n");
 	printf("%d\n", ret);
 }
