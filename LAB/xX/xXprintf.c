@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 00:18:46 by u4s2e0r           #+#    #+#             */
-/*   Updated: 2023/09/06 00:30:40 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/06 04:59:48 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int ft_putstr(const char *str)
 
     i = 0;
     while (str[i])
-        i++;
+	{
+        write(1, &str[i], 1);
+		i++;
+	}
     return (i);
 }
 
@@ -107,29 +110,29 @@ int print_width_and_nbr(unsigned int nbr, t_flags *flags, int *precision, int *w
     printed = 0;
     if (flags->tsix == 1)
     {
-        while (precision-- != 0 && flags->dot == 1)
-            printed += ft_putchar_with_ret('0');
         if (flags->htag == 2)
             printed += ft_putstr("0x");
+		while ((*precision)-- > 0 && flags->dot == 1)
+			printed += ft_putchar_with_ret('0');
         printed += ft_puthex(nbr, 0);
-        while (width_size-- != 0)
+        while ((*width_size)-- > 0)
             printed += ft_putchar_with_ret(' ');
     }
     else
     {
-        if (flags->zero == 1 && flags->dot == 0)
+        if (flags->htag == 2)
+            printed += ft_putstr("0x");
+		if (flags->zero == 1 && flags->dot == 0)
         {
-            while (width_size-- != 0)
+            while ((*width_size)-- > 0)
                 printed += ft_putchar_with_ret('0');
         }
         else
         {
-            while (width_size-- != 0)
+            while ((*width_size)-- > 0)
                 printed += ft_putchar_with_ret(' ');
         }
-        if (flags->htag == 2)
-            printed += ft_putstr("0x");
-        while (precision-- != 0 && flags->dot == 1)
+        while ((*precision)-- > 0 && flags->dot == 1)
             printed += ft_putchar_with_ret('0');
         printed += ft_puthex(nbr, 0);
     }
@@ -146,10 +149,10 @@ int printhex(unsigned int nbr, t_flags *flags)
     printed = 0;
     nbrlen = ft_hexlen(nbr);
     precision = flags->dot_field;
-    if (flags->dot = 1 && (nbrlen < precision))
+    if (flags->dot == 1 && (nbrlen < precision))
         precision -= nbrlen;
     width_size = flags->width_field - (nbrlen + precision + flags->htag);
-    printed += print_width_and_nbr(nbr, &flags, &precision, &width_size);
+    printed += print_width_and_nbr(nbr, flags, &precision, &width_size);
     return (printed);
 }
 
@@ -165,7 +168,7 @@ int pathfinder(const char *str, t_flags *flags, va_list args, int *i)
         flags->htag = 2;
     while (str[(*i)] == '-' || str[(*i)] == '#' || str[(*i)] == ' ' || str[(*i)] == '+')
         (*i)++;
-    if (str[(*i)] == 0)
+    if (str[(*i)] == '0')
         flags->zero = 1;
     flags->width_field = ft_atoi(str, i);
     while (str[(*i)] >= 0 && str[(*i)] <= 9)
@@ -179,7 +182,8 @@ int pathfinder(const char *str, t_flags *flags, va_list args, int *i)
     while (str[(*i)] >= 0 && str[(*i)] <= 9)
         (*i)++;
     printed += printhex(va_arg(args, unsigned int), flags);
-    return (printed)
+	(*i)++;
+    return (printed);
 }
 
 
@@ -211,7 +215,8 @@ int ft_xXprintf(const char *str, ...)
 int main(void)
 {
     int ret = 0;
-    ret = ft_xXprintf("%#-8.4x", 42);
+    ret = ft_xXprintf("%014xc%020xs%02xx%0xi", -1, 3, 30, -1);
     printf("\n");
     printf("%d", ret);
+	printf("\n");
 }

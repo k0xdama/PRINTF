@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:18:15 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/02 21:12:34 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/06 05:02:15 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,10 @@ int	print_width_and_nbr(int nbr, t_flags *flags, int *precision, int *width_size
 	{
 		if (flags->plus == 1)
 			printed += ft_putchar_with_ret('+');
-		while ((*precision)-- != 0)
+		while ((*precision)-- > 0)
 			printed += ft_putchar_with_ret('0');
 		printed += ft_putnbr(nbr);
-		while ((*width_size)-- != 0)
+		while ((*width_size)-- > 0)
 			printed += ft_putchar_with_ret(' ');
 	}
 	else
@@ -112,15 +112,15 @@ int	print_width_and_nbr(int nbr, t_flags *flags, int *precision, int *width_size
 			printed += ft_putchar_with_ret('+');
 		if (flags->zero == 1)
 		{
-			while ((*width_size)-- != 0)
+			while ((*width_size)-- > 0)
 				printed += ft_putchar_with_ret('0');
 		}
 		else
 		{
-			while ((*width_size)-- != 0)
+			while ((*width_size)-- > 0)
 				printed += ft_putchar_with_ret(' ');
 		}
-		while ((*precision)-- != 0)
+		while ((*precision)-- > 0)
 			printed += ft_putchar_with_ret('0');
 		printed += ft_putnbr(nbr);
 	}

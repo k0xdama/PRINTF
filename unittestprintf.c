@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 01:05:19 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/06 00:16:15 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/06 04:48:11 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(void)
 	// printf("\n");
 	// ret = printf("%-8.3u", 42);
 	// printf("\n");
-	ret = printf("%012.4x", 42);
+	ret = printf("%014xc%020xs%02xx%0xi", -1, 3, 30, -1);
 	printf("\n");
 	printf("%d\n", ret);
 }

@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:39:53 by pmateo            #+#    #+#             */
-/*   Updated: 2023/08/24 20:08:36 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/06 05:03:33 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ int	printchar(char c, t_flags *flags)
 
 	printed = 0;
 	width_size = 0;
-	if (flags->width_field != 0)
+	if (flags->width_field > 0)
 	{
 		width_size = flags->width_field;
 		if (flags->tsix == 1)
 			printed += ft_putchar_with_ret(c);
-		while (width_size != 1)
+		while (width_size > 1)
 		{
 			printed += ft_putchar_with_ret(' ');
 			width_size--;

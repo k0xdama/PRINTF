@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 18:49:20 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/02 21:23:12 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/06 05:00:21 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,25 +93,25 @@ int print_width_and_nbr(unsigned int nbr, t_flags *flags, int *precision, int *w
     printed = 0;
     if (flags->tsix == 1)
 	{
-		while ((*precision)-- != 0)
+		while ((*precision)-- > 0)
 			printed += ft_putchar_with_ret('0');
 		printed += ft_uputnbr(nbr);
-		while ((*width_size)-- != 0)
+		while ((*width_size)-- > 0)
 			printed += ft_putchar_with_ret(' ');
 	}
     else
     {
         if (flags->zero == 1)
 		{
-			while ((*width_size)-- != 0)
+			while ((*width_size)-- > 0)
 				printed += ft_putchar_with_ret('0');
 		}
 		else
 		{
-			while ((*width_size)-- != 0)
+			while ((*width_size)-- > 0)
 				printed += ft_putchar_with_ret(' ');
 		}
-        while ((*precision)-- != 0)
+        while ((*precision)-- > 0)
 			printed += ft_putchar_with_ret('0');
 		printed += ft_uputnbr(nbr);
     }
