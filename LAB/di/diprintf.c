@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:18:15 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/06 05:02:15 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/08 21:03:56 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,24 @@ int ft_putchar_with_ret(char c)
     return(write(1, &c, 1));
 }
 
-int ft_nbrlen(int nbr)
+int ft_nbrlen(int nbr, int base)
 {
     int i;
 
     i = 0;
 	if (nbr == 0)
 		i = 1;
-	while (nbr != 0)
+	if (base == 10)
 	{
-		nbr /= 10;
+		while (nbr)
+		{
+			nbr /= 10;
+			i++;
+		}
+	}
+	else if (base == 16)
+	{
+		nbr /= 16;
 		i++;
 	}
 	return (i);
@@ -205,7 +213,7 @@ int main(void)
 {
     int ret = 0;
 	int nbr = 42;
-	ret = ft_diprintf("%- 07d", nbr);
+	ret = ft_diprintf("%- 07d    %d", nbr,  nbr2);
 	printf("\n");
 	printf("ret = %d\n", ret);
 }

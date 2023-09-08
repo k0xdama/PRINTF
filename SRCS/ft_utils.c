@@ -14,88 +14,9 @@
 #include <stdio.h>
 #include "../INCLUDES/ft_printf.h"
 
-int ft_nbrlen(int nb)
-{
-    int len;
-    
-    len = 0;
-    if (nb < 0)
-        len += 1;
-    while (nb != 0)
-    {
-        nb /= 10;
-        len++;
-    }
-    return (len);
-}
-
-int	ft_putnbr(int nb)
-{
-	long	nbl;
-    int     len;
-    
-    len = ft_nbrlen(nb);
-	nbl = nb;
-	if (nbl < 0)
-	{
-		write(1, "-", 1);
-		nbl *= -1;
-	}
-	if (nbl >= 0 && nbl <= 9)
-		ft_putchar(nbl + 48);
-	if (nbl > 9)
-	{
-		ft_putnbr(nbl / 10);
-		ft_putnbr(nbl % 10);
-	}
-    return (len);
-}
-
-int	ft_atoi(char *str)
-{
-	
-}
-
-
-char	*ft_strchr(const char *str, int c)
-{
-	int		i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == (char)c)
-			return ((char *)str + i);
-		else
-			i++;
-	}
-	if (str[i] == c)
-		return ((char *)str + i);
-	return (NULL);
-}
-
-int	is_flags(char c, char *str)
-{
-	int	i;
-	int ret;
-
-	i = 0;
-	ret = 0;
-	while (str[i])
-	{
-		if (c == str[i])
-			ret++;
-		i++;
-	}
-	return (ret);
-}
-
 void	up_struct(t_flags *flags)
 {
 	flags->width_field = 0;
-	// flags->zero_field = 0;
-	// flags->tsix_field = 0;
-	// flags->plus_field = 0;
 	flags->dot_field = 0;
 	flags->zero = 0;
 	flags->htag = 0;
@@ -105,12 +26,66 @@ void	up_struct(t_flags *flags)
 	flags->dot = 0;
 }
 
-int main(void)
+int ft_putchar_with_ret(char c)
 {
-    int nb = -424266;
-    int ret1 = ft_putnbr(nb);
-    int ret2 = printf("%d", nb);
-    printf("\n"); 
-    printf("ret1 = %d\n", ret1);
-    printf("ret2 = %d", ret2);    
+    return(write(1, &c, 1));
+}
+
+int	ft_strlen(const char *str)
+{
+	int i;
+	
+	i = 0;
+	while(str[i])
+		i++;
+	return (i);
+}
+
+int ft_putstr(const char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+	{
+        write(1, &str[i], 1);
+		i++;
+	}
+    return (i);
+}
+
+int ft_nbrlen(int nbr, int base)
+{
+    int i;
+
+    i = 0;
+	if (nbr == 0)
+		i = 1;
+	if (base == 10)
+	{
+		while (nbr)
+		{
+			nbr /= 10;
+			i++;
+		}
+	}
+	else if (base == 16)
+	{
+		nbr /= 16;
+		i++;
+	}
+	return (i);
+}
+
+int	ft_atoi(const char *str, int *i)
+{
+	int	num;
+	
+	num = 0;
+	while (str[(*i)] >= '0' && str[(*i)] <= '9')
+	{
+		num = num * 10 + (str[(*i)] - 48);
+		(*i)++;
+	}
+	return (num);
 }

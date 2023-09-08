@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 00:18:46 by u4s2e0r           #+#    #+#             */
-/*   Updated: 2023/09/06 04:59:48 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/08 21:16:50 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ int ft_xXprintf(const char *str, ...)
 int main(void)
 {
     int ret = 0;
-    ret = ft_xXprintf("%014xc%020xs%02xx%0xi", -1, 3, 30, -1);
+    ret = ft_xXprintf("%x", -1);
     printf("\n");
     printf("%d", ret);
 	printf("\n");
