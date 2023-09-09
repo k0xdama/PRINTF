@@ -6,44 +6,44 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:31 by pmateo            #+#    #+#             */
-/*   Updated: 2023/08/15 08:52:58 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/09 18:28:12 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stddef.h>
-#include <stdio.h>
+#include "../INCLUDES/ft_printf.h"
 
-int	ft_putstr(char *str)
+int	ft_strlen(const char *str)
 {
-	int	len;
-
-	len = 0;
-	if (str == NULL)
-	{
-		len = 6;
-		write(1, "(null)", len);
-		return (len);
-	}
-	else 
-	{
-		while(str[len])
-		{
-			write(1, &str[len], 1);
-			len++;
-		}
-		return (len);
-	}
+	int	i;
+	
+	i = 0;
+	while (str[i])
+		i++;
+	return (0);
 }
 
-// int	main(void)
-// {
-// 	char *str = NULL;
-// 	int ret1;
-// 	int ret2;
-// 	ret1 = ft_putstr(str);
-// 	ret2 = printf("%s", str);
-// 	printf("ret1 = %d\nret2 = %d", ret1, ret2);
-// 	return (0);
-// }
+int	ft_printstr(const char *str, t_flags *flags)
+{
+	int	printed;
+	int	limit;
+	int	strlen;
+	int	width_size;
+
+	printed = 0;
+	limit = flags->dot_field;
+	strlen = ft_strlen(str);
+	if (limit < strlen)
+		strlen = limit;
+	width_size = flags->width_field;
+	if (flags->tsix == 1)
+		printed += ft_putstr(str, strlen);
+	while (width_size != strlen)
+	{
+		printed += ft_putchar_with_ret(' ');
+		width_size--;		
+	}
+	if (flags->tsix == 0)
+		printed += ft_putstr(str, strlen);
+	return (printed);
+}
 

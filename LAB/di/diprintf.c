@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:18:15 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/08 21:03:56 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/09 19:02:07 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ int	print_width_and_nbr(int nbr, t_flags *flags, int *precision, int *width_size
 	}
 	else
 	{
-		if (flags->plus == 1)
-			printed += ft_putchar_with_ret('+');
 		if (flags->zero == 1)
 		{
 			while ((*width_size)-- > 0)

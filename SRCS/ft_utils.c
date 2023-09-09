@@ -20,9 +20,10 @@ void	up_struct(t_flags *flags)
 	flags->dot_field = 0;
 	flags->zero = 0;
 	flags->htag = 0;
+	flags->htag_cap = 0;
 	flags->space = 0;
 	flags->plus = 0;
-	flags->tsix = 0;
+	flags->dash = 0;
 	flags->dot = 0;
 }
 
@@ -31,27 +32,24 @@ int ft_putchar_with_ret(char c)
     return(write(1, &c, 1));
 }
 
-int	ft_strlen(const char *str)
+int	ft_putstr(const char *str, int len)
 {
-	int i;
-	
-	i = 0;
-	while(str[i])
-		i++;
-	return (i);
-}
+	int	len;
+	int printed;
 
-int ft_putstr(const char *str)
-{
-    int i;
-
-    i = 0;
-    while (str[i])
+	printed = 0;
+	if (str == NULL)
 	{
-        write(1, &str[i], 1);
-		i++;
+		len = 6;
+		printed += write(1, "(null)", len);
+		return (printed);
 	}
-    return (i);
+	else 
+	{
+		if (len)
+			printed += write(1, str, len);
+		return (printed);
+	}
 }
 
 int ft_nbrlen(int nbr, int base)
@@ -82,6 +80,8 @@ int	ft_atoi(const char *str, int *i)
 	int	num;
 	
 	num = 0;
+	while (str[(*i)] < '0' || str[(*i)] > '9')
+		(*i)++;
 	while (str[(*i)] >= '0' && str[(*i)] <= '9')
 	{
 		num = num * 10 + (str[(*i)] - 48);

@@ -1,54 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unbr.c                                          :+:      :+:    :+:   */
+/*   ft_nbr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 22:44:40 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/09 20:02:23 by pmateo           ###   ########.fr       */
+/*   Created: 2023/09/09 18:36:05 by pmateo            #+#    #+#             */
+/*   Updated: 2023/09/09 19:33:53 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/ft_printf.h"
 
-static int	ft_uputnbr(unsigned int nbr)
+static int	ft_putnbr(int nbr)
 {
-	unsigned long	nbl;
-	int len;
-
+	long	nbl;
+    int     len;
+    
+    len = ft_nbrlen(nbr);
 	nbl = nbr;
-	len = ft_nbrlen(nbr, 10);
-	if (nbl <= 9)
+	if (nbl < 0)
+	{
+		write(1, "-", 1);
+		nbl *= -1;
+	}
+	if (nbl >= 0 && nbl <= 9)
 		ft_putchar_with_ret(nbl + 48);
 	if (nbl > 9)
 	{
-		ft_uputnbr(nbl / 10);
-		ft_uputnbr(nbl % 10);
+		ft_putnbr(nbl / 10);
+		ft_putnbr(nbl % 10);
 	}
-	return (len);
+    return (len);
 }
 
-static int	dash_on(unsigned int nbr, t_flags *flags, int *precision, int *width_size)
+static int	dash_off(int nbr, t_flags *flags, int *precision, int *width_size)
 {
 	int	printed;
 
 	printed = 0;
-	while ((*precision)-- > 0)
-		printed += ft_putchar_with_ret('0');
-	printed += ft_uputnbr(nbr);
-	while ((*width_size)-- > 0)
-		printed += ft_putchar_with_ret(' ');
-	return (printed);
-}
-
-static int	dash_off(unsigned int nbr, t_flags *flags, int *precision, int *width_size)
-{
-	int	printed;
-
-	printed = 0;
-	if (flags->zero == 1)
+	if (flags->zero = 1 && flags->dot != 1)
 	{
+		if (flags->plus == 1)
+			printed += ft_putchar_with_ret('+');
 		while ((*width_size)-- > 0)
 			printed += ft_putchar_with_ret('0');
 	}
@@ -57,13 +51,29 @@ static int	dash_off(unsigned int nbr, t_flags *flags, int *precision, int *width
 		while ((*width_size)-- > 0)
 			printed += ft_putchar_with_ret(' ');
 	}
+	if (flags->plus == 1)
+		printed += ft_putchar_with_ret('+');
 	while ((*precision)-- > 0)
 		printed += ft_putchar_with_ret('0');
-	printed += ft_uputnbr(nbr);
+	printed += ft_putnbr(nbr);		
+}
+
+static int	dash_on(int nbr, t_flags *flags, int *precision, int *width_size)
+{
+	int	printed;
+
+	printed = 0;
+	if (flags->plus == 1)
+		printed += ft_putchar_with_ret('+');
+	while ((*precision)-- > 0)
+		printed += ft_putchar_with_ret('0');
+	printed += ft_putnbr(nbr);
+	while ((*width_size)-- > 0)
+		printed += ft_putchar_with_ret(' ');
 	return (printed);
 }
 
-int	printunbr(unsigned int nbr, t_flags *flags)
+int	ft_printnbr(int nbr, t_flags *flags)
 {
 	int	printed;
 	int	nbrlen;
@@ -73,24 +83,14 @@ int	printunbr(unsigned int nbr, t_flags *flags)
 	printed = 0;
 	nbrlen = ft_nbrlen(nbr, 10);
 	precision = flags->dot_field;
-	if (flags->dot == 1 && nbrlen < precision)
+	if (flags->dot == 1 && precision > nbrlen)
 		precision -= nbrlen;
-	width_size = flags->width_field - (nbrlen + precision);
+	width_size = flags->width_field - (nbrlen + precision + flags->plus + flags->space);
+	if (flags->space == 1)
+		printed += ft_putchar_with_ret(' ');
 	if (flags->tsix == 1)
 		printed += dash_on(nbr, flags, &precision, &width_size);
 	else if (flags->tsix == 0)
 		printed += dash_off(nbr, flags, &precision, &width_size);
-	return (printed); 
+	return (printed);
 }
-
-
-// int	main(void)
-// {
-// 	unsigned int nb = 4568001447;
-// 	int ret1 = ft_uputnbr(nb);
-// 	printf("\n");
-// 	int ret2 = printf("%u", nb);
-// 	printf("\n");
-// 	printf("ret1 = %d\n", ret1);
-// 	printf("ret2 = %d\n", ret2);
-// }

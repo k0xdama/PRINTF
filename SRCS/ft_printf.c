@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:38 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/08 22:14:12 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/09 20:42:11 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,42 @@
 #include <stdio.h>
 #include "../INCLUDES/ft_printf.h"
 
-int     conv_specifiers(const char *str, t_flags *flags, va_list args)
+int     conv_specifiers(const char *str, va_list args, t_flags *flags, int *i)
 {
 	int	printed;
 	
 	printed = 0;
-	if (*str == 'c')
+	if (str[(*i)] == 'c')
 		printed += ft_printchar(va_arg(args, char), flags);
-	else if (*str == 's')
+	else if (str[(*i)] == 's')
 		printed += ft_printstr(va_arg(args, char *), flags);
-	else if (*str == 'p')
-		printed += ft_printptr(va_arg(args, void *), flags);
-	else if (*str == 'd' || *str == 'i')
+	else if (str[(*i)] == 'p')
+		printed += ft_printptr(va_arg(args, uintptr_t), flags);
+	else if (str[(*i)] == 'd' || str[(*i)] == 'i')
 		printed += ft_printnbr(va_arg(args, int), flags);
-	else if (*str == 'u')
-		printed += ft_printunbr(va_arg(args, int), flags);
-	else if (*str == 'x' || *str == 'X')
-		printed += ft_printhexa(va_arg(args, int), flags);
-	else if (*str == '%')
-		printed += ft_printchar('%', flags);	
+	else if (str[(*i)] == 'u')
+		printed += ft_printunbr(va_arg(args, unsigned int), flags);
+	else if (str[(*i)] == 'x' || str[(*i)] == 'X')
+		printed += ft_printhexa(va_arg(args, unsigned long int), flags, str[(*i)]);
+	else if (str[(*i)] == '%')
+		printed += ft_printchar('%', flags);
 	return (printed);
 }
 
-int	pathfinder1(const char str, va_list args, t_flags *flags, int *i)
+void	pathfinder2(const char *str, va_list args, t_flags *flags, int *i)
+{
+	if (str[(*i)] == '0')
+		flags->zero = 1;
+	flags->width_field = ft_atoi(str, i);
+	if (str[(*i)] == '.')
+	{
+		flags->dot = 1;
+		(*i)++;
+	}
+	flags->dot_field = ft_atoi(str, i);
+}
+
+int	pathfinder1(const char *str, va_list args, t_flags *flags, int *i)
 {
 	int printed;
 
@@ -45,7 +58,7 @@ int	pathfinder1(const char str, va_list args, t_flags *flags, int *i)
 	(*i)++;
 	if (str[(*i)] == '-' || str[(*i)+1] == '-' || str[(*i)+2] == '-'
 		|| str[(*i)+2] == '-')
-		flags->tsix = 1;
+		flags->dash = 1;
 	if (str[(*i)] == '+' || str[(*i)+1] == '+' || str[(*i)+2] == '+'
 		|| str[(*i)+3] == '+')
 		flags->plus = 1;
@@ -58,8 +71,8 @@ int	pathfinder1(const char str, va_list args, t_flags *flags, int *i)
 	while (str[(*i)] == '+' || str[(*i)] == '-' || str[(*i)] == ' '
 		|| str[(*i)] == '#')
 		(*i)++;
-	pathfinder(str, args, flags, i);
-	printed += conv_specifiers(str, args, flags);
+	pathfinder2(str, args, flags, i);
+	printed += conv_specifiers(str, args, flags, i);
 	return (printed)
 }
 
