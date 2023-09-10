@@ -20,7 +20,7 @@ void	up_struct(t_flags *flags)
 	flags->dot_field = 0;
 	flags->zero = 0;
 	flags->htag = 0;
-	flags->htag_cap = 0;
+	flags->hex_cap = 0;
 	flags->space = 0;
 	flags->plus = 0;
 	flags->dash = 0;
