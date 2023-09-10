@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:38 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/10 18:00:25 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/10 19:29:41 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	pathfinder1(const char *str, va_list args, t_flags *flags, int *i)
 		(*i)++;
 	pathfinder2(str, flags, i);
 	printed += conv_specifiers(str, args, flags, i);
+	(*i)++;
 	return (printed);
 }
 
@@ -98,8 +99,11 @@ int ft_printf(const char *str, ...)
 	return (printed);
 }
 
-// int main(void)
-// {
-//     int nb = 42;
-//     ft_printf("blabla = %d", 42);
-// }
+int main(void)
+{
+    int ret = 0;
+	// char *str = "ntm";
+    ret = ft_printf("%+ #12X", 42);
+	printf("\n");
+	printf("%d", ret);
+}

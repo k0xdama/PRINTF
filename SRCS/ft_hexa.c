@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:43 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/10 18:06:34 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/10 19:44:04 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	dash_on(unsigned int nbr, t_flags *flags, int *precision, int *width_
 		else
 			printed += ft_putstr("0x", 2);
 	}
-	while ((*precision)-- > 0)
+	while (((*precision)-- >= 0) && (flags->dot == 1))
 		printed += ft_putchar_with_ret('0');
 	if (flags->hex_cap == 1)
 		printed += ft_puthexa(nbr, 1);
@@ -63,10 +63,10 @@ static int	dash_off(unsigned int nbr, t_flags *flags, int *precision, int *width
 	int	printed;
 
 	printed = 0;
-	while (((*width_size)-- > 0) && (flags->zero == 1))
-		printed += ft_putchar_with_ret('0');
-	while (((*width_size)-- > 0) && (flags->zero == 0))
+	while (((*width_size)-- >= 0) && (flags->zero == 0))
 		printed += ft_putchar_with_ret(' ');
+	while (((*width_size)-- >= 0) && (flags->zero == 1))
+		printed += ft_putchar_with_ret('0');
 	if (flags->htag == 2)
 	{
 		if (flags->hex_cap == 1)
@@ -74,7 +74,7 @@ static int	dash_off(unsigned int nbr, t_flags *flags, int *precision, int *width
 		else
 			printed += ft_putstr("0x", 2);
 	}
-	while ((*precision)-- > 0)
+	while (((*precision)-- >= 0) && (flags->dot == 1))
 		printed += ft_putchar_with_ret('0');
 	if (flags->hex_cap == 1)
 		printed += ft_puthexa(nbr, 1);

@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 03:45:42 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/10 18:07:53 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/10 18:58:44 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ typedef	struct s_flags
 	int			dot;
 }				t_flags;
 
-int				ft_strlen(const char *str);
-int				ft_nbrlen(int nb, int base);
-int				ft_hexalen(unsigned int nb);
+int				ft_nbrlen(long int nb, int base);
 int				ft_putchar_with_ret(char c);
 int				ft_putstr(const char *str, int len);
 int				ft_atoi(const char *str, int *i);

@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:36:05 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/10 18:10:15 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/10 18:56:24 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ static int	dash_off(int nbr, t_flags *flags, int *precision, int *width_size)
 	{
 		if (flags->plus == 1)
 			printed += ft_putchar_with_ret('+');
-		while ((*width_size)-- > 0)
+		while ((*width_size)-- >= 0)
 			printed += ft_putchar_with_ret('0');
 	}
 	else
 	{
-		while ((*width_size)-- > 0)
+		while ((*width_size)-- >= 0)
 			printed += ft_putchar_with_ret(' ');
 	}
 	if (flags->plus == 1)
 		printed += ft_putchar_with_ret('+');
-	while ((*precision)-- > 0)
+	while ((*precision)-- >= 0)
 		printed += ft_putchar_with_ret('0');
 	printed += ft_putnbr(nbr);
 	return (printed);	
@@ -66,10 +66,10 @@ static int	dash_on(int nbr, t_flags *flags, int *precision, int *width_size)
 	printed = 0;
 	if (flags->plus == 1)
 		printed += ft_putchar_with_ret('+');
-	while ((*precision)-- > 0)
+	while ((*precision)-- >= 0)
 		printed += ft_putchar_with_ret('0');
 	printed += ft_putnbr(nbr);
-	while ((*width_size)-- > 0)
+	while ((*width_size)-- >= 0)
 		printed += ft_putchar_with_ret(' ');
 	return (printed);
 }

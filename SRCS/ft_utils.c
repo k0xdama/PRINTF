@@ -51,7 +51,7 @@ int	ft_putstr(const char *str, int len)
 	}
 }
 
-int ft_nbrlen(int nbr, int base)
+int ft_nbrlen(long int nbr, int base)
 {
     int i;
 
@@ -68,8 +68,11 @@ int ft_nbrlen(int nbr, int base)
 	}
 	else if (base == 16)
 	{
-		nbr /= 16;
-		i++;
+		while(nbr)
+		{
+			nbr /= 16;
+			i++;
+		}
 	}
 	return (i);
 }
@@ -79,8 +82,6 @@ int	ft_atoi(const char *str, int *i)
 	int	num;
 	
 	num = 0;
-	while (str[(*i)] < '0' || str[(*i)] > '9')
-		(*i)++;
 	while (str[(*i)] >= '0' && str[(*i)] <= '9')
 	{
 		num = num * 10 + (str[(*i)] - 48);

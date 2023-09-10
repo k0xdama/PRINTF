@@ -6,13 +6,13 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:31 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/10 17:56:30 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/10 18:58:32 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/ft_printf.h"
 
-int	ft_strlen(const char *str)
+static	int	ft_strlen(const char *str)
 {
 	int	i;
 	
