@@ -6,13 +6,10 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:38 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/09 20:42:11 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/10 18:00:25 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <unistd.h>
-#include <stdio.h>
 #include "../INCLUDES/ft_printf.h"
 
 int     conv_specifiers(const char *str, va_list args, t_flags *flags, int *i)
@@ -21,7 +18,7 @@ int     conv_specifiers(const char *str, va_list args, t_flags *flags, int *i)
 	
 	printed = 0;
 	if (str[(*i)] == 'c')
-		printed += ft_printchar(va_arg(args, char), flags);
+		printed += ft_printchar(va_arg(args, int), flags);
 	else if (str[(*i)] == 's')
 		printed += ft_printstr(va_arg(args, char *), flags);
 	else if (str[(*i)] == 'p')
@@ -37,7 +34,7 @@ int     conv_specifiers(const char *str, va_list args, t_flags *flags, int *i)
 	return (printed);
 }
 
-void	pathfinder2(const char *str, va_list args, t_flags *flags, int *i)
+void	pathfinder2(const char *str, t_flags *flags, int *i)
 {
 	if (str[(*i)] == '0')
 		flags->zero = 1;
@@ -64,16 +61,16 @@ int	pathfinder1(const char *str, va_list args, t_flags *flags, int *i)
 		flags->plus = 1;
 	if (str[(*i)] == ' ' || str[(*i)+1] == ' ' || str[(*i+2)] == ' '
 		|| str[(*i)+3] ==  ' ')
-		flags->space == 1;
+		flags->space = 1;
 	if (str[(*i)] == '#' || str[(*i)+1] == '#' || str[(*i+2)] == '#'
 		|| str[(*i)+3] ==  '#')
-		flags->htag == 2;
+		flags->htag = 2;
 	while (str[(*i)] == '+' || str[(*i)] == '-' || str[(*i)] == ' '
 		|| str[(*i)] == '#')
 		(*i)++;
-	pathfinder2(str, args, flags, i);
+	pathfinder2(str, flags, i);
 	printed += conv_specifiers(str, args, flags, i);
-	return (printed)
+	return (printed);
 }
 
 int ft_printf(const char *str, ...)
@@ -101,8 +98,8 @@ int ft_printf(const char *str, ...)
 	return (printed);
 }
 
-int main(void)
-{
-    int nb = 42;
-    ft_printf("blabla = %d", 42);
-}
+// int main(void)
+// {
+//     int nb = 42;
+//     ft_printf("blabla = %d", 42);
+// }

@@ -6,7 +6,7 @@
 #    By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/10 16:50:41 by pmateo            #+#    #+#              #
-#    Updated: 2023/09/10 17:32:11 by pmateo           ###   ########.fr        #
+#    Updated: 2023/09/10 17:44:24 by pmateo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS	=		SRCS/ft_printf.c \
 				SRCS/ft_unbr.c   \
 				SRCS/ft_utils.c  \
 
-OBJS	= ${SRC:.c=.o}
+OBJS	= ${SRCS:.c=.o}
 
 NAME = libftprintf.a
 

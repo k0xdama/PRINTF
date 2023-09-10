@@ -34,7 +34,6 @@ int ft_putchar_with_ret(char c)
 
 int	ft_putstr(const char *str, int len)
 {
-	int	len;
 	int printed;
 
 	printed = 0;

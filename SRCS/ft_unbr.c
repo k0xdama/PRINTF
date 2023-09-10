@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:40 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/09 20:02:23 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/10 18:17:55 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_uputnbr(unsigned int nbr)
 	return (len);
 }
 
-static int	dash_on(unsigned int nbr, t_flags *flags, int *precision, int *width_size)
+static int	dash_on(unsigned int nbr, int *precision, int *width_size)
 {
 	int	printed;
 
@@ -63,7 +63,7 @@ static int	dash_off(unsigned int nbr, t_flags *flags, int *precision, int *width
 	return (printed);
 }
 
-int	printunbr(unsigned int nbr, t_flags *flags)
+int	ft_printunbr(unsigned int nbr, t_flags *flags)
 {
 	int	printed;
 	int	nbrlen;
@@ -76,9 +76,9 @@ int	printunbr(unsigned int nbr, t_flags *flags)
 	if (flags->dot == 1 && nbrlen < precision)
 		precision -= nbrlen;
 	width_size = flags->width_field - (nbrlen + precision);
-	if (flags->tsix == 1)
-		printed += dash_on(nbr, flags, &precision, &width_size);
-	else if (flags->tsix == 0)
+	if (flags->dash == 1)
+		printed += dash_on(nbr, &precision, &width_size);
+	else if (flags->dash == 0)
 		printed += dash_off(nbr, flags, &precision, &width_size);
 	return (printed); 
 }

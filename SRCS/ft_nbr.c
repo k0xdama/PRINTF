@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:36:05 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/09 19:33:53 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/10 18:10:15 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_putnbr(int nbr)
 	long	nbl;
     int     len;
     
-    len = ft_nbrlen(nbr);
+    len = ft_nbrlen(nbr, 10);
 	nbl = nbr;
 	if (nbl < 0)
 	{
@@ -39,7 +39,7 @@ static int	dash_off(int nbr, t_flags *flags, int *precision, int *width_size)
 	int	printed;
 
 	printed = 0;
-	if (flags->zero = 1 && flags->dot != 1)
+	if (flags->zero == 1 && flags->dot != 1)
 	{
 		if (flags->plus == 1)
 			printed += ft_putchar_with_ret('+');
@@ -55,7 +55,8 @@ static int	dash_off(int nbr, t_flags *flags, int *precision, int *width_size)
 		printed += ft_putchar_with_ret('+');
 	while ((*precision)-- > 0)
 		printed += ft_putchar_with_ret('0');
-	printed += ft_putnbr(nbr);		
+	printed += ft_putnbr(nbr);
+	return (printed);	
 }
 
 static int	dash_on(int nbr, t_flags *flags, int *precision, int *width_size)
@@ -88,9 +89,9 @@ int	ft_printnbr(int nbr, t_flags *flags)
 	width_size = flags->width_field - (nbrlen + precision + flags->plus + flags->space);
 	if (flags->space == 1)
 		printed += ft_putchar_with_ret(' ');
-	if (flags->tsix == 1)
+	if (flags->dash == 1)
 		printed += dash_on(nbr, flags, &precision, &width_size);
-	else if (flags->tsix == 0)
+	else if (flags->dash == 0)
 		printed += dash_off(nbr, flags, &precision, &width_size);
 	return (printed);
 }

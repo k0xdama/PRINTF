@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:36 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/10 16:46:57 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/10 18:11:36 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,26 @@ static	int ft_putptr(uintptr_t ptr)
 	return (len);
 }
 
-static	int	dash_on(uintptr_t ptr, t_flags *flags, int *width_size)
+static	int	dash_on(uintptr_t ptr, int *width_size)
 {
 	int	printed;
 
 	printed = 0;
-	printed += ft_putstr("0x");
+	printed += ft_putstr("0x", 2);
 	printed += ft_putptr(ptr);
 	while ((*width_size)-- > 0)
 		printed += ft_putchar_with_ret(' ');
 	return (printed);
 }
 
-static	int	dash_off(uintptr_t ptr, t_flags *flags, int *width_size)
+static	int	dash_off(uintptr_t ptr, int *width_size)
 {
 	int	printed;
 
 	printed = 0;
 	while((*width_size)-- > 0 )
 		printed += ft_putchar_with_ret(' ');
-	printed += ft_putstr("0x");
+	printed += ft_putstr("0x", 2);
 	printed += ft_putptr(ptr);
 	return (printed);
 }
@@ -62,9 +62,9 @@ int ft_printptr(uintptr_t ptr, t_flags *flags)
     ptrlen = ft_nbrlen(ptr, 16);
     width_size = flags->width_field - (ptrlen + 2);
     if (flags->dash == 1)
-        printed += dash_on(ptr, flags, &width_size);
+        printed += dash_on(ptr, &width_size);
     else if (flags->dash == 0)
-        printed += dash_off(ptr, flags, width_size);
+        printed += dash_off(ptr, &width_size);
     return (printed);
 }
 
