@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:36:05 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/10 18:56:24 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/11 17:11:02 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,41 +37,45 @@ static int	ft_putnbr(int nbr)
 static int	dash_off(int nbr, t_flags *flags, int *precision, int *width_size)
 {
 	int	printed;
+	int	printed_prec;
 
 	printed = 0;
+	printed_prec = 0;
 	if (flags->zero == 1 && flags->dot != 1)
 	{
 		if (flags->plus == 1)
 			printed += ft_putchar_with_ret('+');
-		while ((*width_size)-- >= 0)
+		while (printed < (*width_size))
 			printed += ft_putchar_with_ret('0');
 	}
 	else
 	{
-		while ((*width_size)-- >= 0)
+		while (printed < (*width_size))
 			printed += ft_putchar_with_ret(' ');
 	}
 	if (flags->plus == 1)
 		printed += ft_putchar_with_ret('+');
-	while ((*precision)-- >= 0)
-		printed += ft_putchar_with_ret('0');
+	while (printed_prec < (*precision))
+		printed_prec += ft_putchar_with_ret('0');
 	printed += ft_putnbr(nbr);
-	return (printed);	
+	return (printed + printed_prec);	
 }
 
 static int	dash_on(int nbr, t_flags *flags, int *precision, int *width_size)
 {
 	int	printed;
+	int	printed_prec;
 
 	printed = 0;
+	printed_prec = 0;
 	if (flags->plus == 1)
 		printed += ft_putchar_with_ret('+');
-	while ((*precision)-- >= 0)
-		printed += ft_putchar_with_ret('0');
+	while (printed_prec < (*precision))
+		printed_prec += ft_putchar_with_ret('0');
 	printed += ft_putnbr(nbr);
-	while ((*width_size)-- >= 0)
+	while (printed < (*width_size))
 		printed += ft_putchar_with_ret(' ');
-	return (printed);
+	return (printed + printed_prec);
 }
 
 int	ft_printnbr(int nbr, t_flags *flags)

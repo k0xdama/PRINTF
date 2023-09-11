@@ -6,11 +6,14 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:38 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/10 19:29:41 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/11 21:32:26 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/ft_printf.h"
+
+
+
 
 int     conv_specifiers(const char *str, va_list args, t_flags *flags, int *i)
 {
@@ -47,27 +50,38 @@ void	pathfinder2(const char *str, t_flags *flags, int *i)
 	flags->dot_field = ft_atoi(str, i);
 }
 
+static int	is_flags(char c)
+{
+	char *flags;
+
+	flags = "-+ #";
+	while (*flags)
+	{
+		if (c == *flags)
+			return (1);
+		flags++;
+	}
+	return (0);
+}
+
 int	pathfinder1(const char *str, va_list args, t_flags *flags, int *i)
 {
 	int printed;
 
 	printed = 0;
 	(*i)++;
-	if (str[(*i)] == '-' || str[(*i)+1] == '-' || str[(*i)+2] == '-'
-		|| str[(*i)+2] == '-')
-		flags->dash = 1;
-	if (str[(*i)] == '+' || str[(*i)+1] == '+' || str[(*i)+2] == '+'
-		|| str[(*i)+3] == '+')
-		flags->plus = 1;
-	if (str[(*i)] == ' ' || str[(*i)+1] == ' ' || str[(*i+2)] == ' '
-		|| str[(*i)+3] ==  ' ')
-		flags->space = 1;
-	if (str[(*i)] == '#' || str[(*i)+1] == '#' || str[(*i+2)] == '#'
-		|| str[(*i)+3] ==  '#')
-		flags->htag = 2;
-	while (str[(*i)] == '+' || str[(*i)] == '-' || str[(*i)] == ' '
-		|| str[(*i)] == '#')
-		(*i)++;
+	while (is_flags(str[(*i)]))
+	{
+		if (str[(*i)] == '-')
+			flags->dash = 1;
+		else if (str[(*i)] == '+')
+			flags->plus = 1;
+		else if (str[(*i)] == ' ')
+			flags->space = 1;
+		else if (str[(*i)] == '#')
+			flags->htag = 1;
+		(*i)++;	
+	}
 	pathfinder2(str, flags, i);
 	printed += conv_specifiers(str, args, flags, i);
 	(*i)++;
@@ -103,7 +117,7 @@ int main(void)
 {
     int ret = 0;
 	// char *str = "ntm";
-    ret = ft_printf("%+ #12X", 42);
+    ret = ft_printf("%d, %d", 10, 20);
 	printf("\n");
 	printf("%d", ret);
 }

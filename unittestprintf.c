@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 01:05:19 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/10 19:00:39 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/11 17:36:05 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,8 @@ int	main(void)
 {
 	int ret = 0;
 	// char *str = "ntm";
-	// printf("%30d", 2147483647);
-	// printf("\n");
-	// printf("%-30d", 2147483647);
-	// printf("\n");
-	// printf("%-.9d", 2147483647);
-	// printf("\n");
-	// printf("%#9X", 42);
-	// printf("\n");
-	// printf("%042d\n", 42);
-	// printf("%+010d", 42);
-	// printf("\n");
-	// printf("%#13d", 42);
-	// printf("\n");
-	// ret = printf("%-20c", '#');
-	// printf("\n");
-	// ret = printf("%-.4s", "myboy");
-	// printf("\n");
-	// ret = printf("%- 07d", 42);
-	// printf("\n");
-	// ret = printf("%-8.3u", 42);
-	// printf("\n");
-	// ret = printf("%014xc%020xs%02xx%0xi", -1, 3, 30, -1);
-	// printf("\n");
-	// printf("%d\n", ret);
-	ret = printf("%-+ #12X", 42);
+	ret = printf("%u", 42);
+	ret = printf("some naugty tests: %s", "0000%");
 	printf("\n");
 	printf("ret = %d", ret);
 	}
