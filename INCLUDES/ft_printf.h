@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 03:45:42 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/10 18:58:44 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/12 04:16:22 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ typedef	struct s_flags
 }				t_flags;
 
 int				ft_nbrlen(long int nb, int base);
+int				ft_strlen(const char *str);
 int				ft_putchar_with_ret(char c);
-int				ft_putstr(const char *str, int len);
+int				ft_putstr(const char *str);
 int				ft_atoi(const char *str, int *i);
 void			up_struct(t_flags *flags);
 int				pathfinder1(const char *str, va_list args, t_flags *flags, int *i);

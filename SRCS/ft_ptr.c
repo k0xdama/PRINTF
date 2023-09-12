@@ -6,13 +6,13 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:36 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/11 17:12:41 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/12 03:35:56 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/ft_printf.h"
 
-int ft_ptrlen(uintptr_t ptr)
+int ft_ptrlen(unsigned long ptr)
 {
     int i;
 
@@ -30,7 +30,7 @@ static	int ft_putptr(uintptr_t ptr)
     int	len;
     char	*base;
 
-    len = ft_ptrlen(ptr);
+    len = ft_ptrlen((unsigned long)ptr);
 	base = "0123456789abcdef";
     if (ptr <= 16)
 		ft_putchar_with_ret(base[ptr]);
@@ -40,6 +40,7 @@ static	int ft_putptr(uintptr_t ptr)
 		ft_putptr(ptr % 16);
 	}
 	return (len);
+	
 }
 
 static	int	dash_on(uintptr_t ptr, int *width_size)
@@ -47,10 +48,15 @@ static	int	dash_on(uintptr_t ptr, int *width_size)
 	int	printed;
 
 	printed = 0;
-	printed += ft_putstr("0x", 2);
-	printed += ft_putptr(ptr);
-	while (printed < (*width_size))
-		printed += ft_putchar_with_ret(' ');
+	if (ptr == 0)
+		printed += ft_putstr("(nil)");
+	else
+	{
+		printed += ft_putstr("0x");
+		printed += ft_putptr(ptr);
+		while (printed < (*width_size))
+			printed += ft_putchar_with_ret(' ');
+	}
 	return (printed);
 }
 
@@ -61,8 +67,13 @@ static	int	dash_off(uintptr_t ptr, int *width_size)
 	printed = 0;
 	while(printed < (*width_size))
 		printed += ft_putchar_with_ret(' ');
-	printed += ft_putstr("0x", 2);
-	printed += ft_putptr(ptr);
+	if (ptr == 0)
+		printed += ft_putstr("(nil)");
+	else
+	{
+		printed += ft_putstr("0x");
+		printed += ft_putptr(ptr);
+	}
 	return (printed);
 }
 int ft_printptr(uintptr_t ptr, t_flags *flags)

@@ -32,21 +32,21 @@ int ft_putchar_with_ret(char c)
     return(write(1, &c, 1));
 }
 
-int	ft_putstr(const char *str, int len)
+int	ft_putstr(const char *str)
 {
 	int printed;
+	int len;
 
 	printed = 0;
+	len = ft_strlen(str);
 	if (str == NULL)
 	{
-		len = 6;
-		printed += write(1, "(null)", len);
+		printed += write(1, "(null)", 6);
 		return (printed);
 	}
 	else 
 	{
-		if (len)
-			printed += write(1, str, len);
+		printed += write(1, str, len);
 		return (printed);
 	}
 }
@@ -60,6 +60,8 @@ int ft_nbrlen(long int nbr, int base)
 		i = 1;
 	if (base == 10)
 	{
+		if (nbr < 0)
+			i++;
 		while (nbr)
 		{
 			nbr /= 10;

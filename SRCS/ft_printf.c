@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:38 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/11 21:32:26 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/12 04:50:14 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	pathfinder1(const char *str, va_list args, t_flags *flags, int *i)
 		else if (str[(*i)] == ' ')
 			flags->space = 1;
 		else if (str[(*i)] == '#')
-			flags->htag = 1;
+			flags->htag = 2;
 		(*i)++;	
 	}
 	pathfinder2(str, flags, i);
@@ -92,17 +92,19 @@ int ft_printf(const char *str, ...)
 {
 	int	i;
 	int	printed;
-	t_flags flags;
 	va_list args;
+	t_flags flags;
 
 	i = 0;
 	printed = 0;
-	up_struct(&flags);
 	va_start(args, str);
 	while(str[i])
 	{
 		if(str[i] == '%')
+		{
+			up_struct(&flags);
 			printed += pathfinder1(str, args, &flags, &i);
+		}
 		else
 		{
 			printed += ft_putchar_with_ret(str[i]);
@@ -117,7 +119,7 @@ int main(void)
 {
     int ret = 0;
 	// char *str = "ntm";
-    ret = ft_printf("%d, %d", 10, 20);
+    ret = ft_printf("%042.20X", 42000);
 	printf("\n");
 	printf("%d", ret);
 }
