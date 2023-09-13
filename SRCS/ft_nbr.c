@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:36:05 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/12 04:39:29 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:18:07 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_putnbr(int nbr, t_flags *flags)
 	if (nbl < 0)
 	{
 		if (flags->zero == 0)
-			printed += write(1, "-", 1);
+			write(1, "-", 1);
 		nbl *= -1;
 	}
 	if (nbl >= 0 && nbl <= 9)

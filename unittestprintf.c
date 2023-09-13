@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 01:05:19 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/12 04:59:14 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/13 15:40:34 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(void)
 	// char *str = "ntm";
 	// str = NULL;
 	// ret = printf("%u", 42);
-	ret = printf("%#042.20X", 42000);
+	ret = printf("%#042X", 42000);
 	printf("\n");
 	printf("ret = %d", ret);
 	}

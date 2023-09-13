@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:40 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/11 17:44:17 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/13 16:22:50 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,13 @@ static int	dash_off(unsigned int nbr, t_flags *flags, int *precision, int *width
 
 	printed = 0;
 	printed_prec = 0;
-	if (flags->zero == 1)
-	{
-		while (printed < (*width_size))
-			printed += ft_putchar_with_ret('0');
-	}
-	else
-	{
-		while (printed < (*width_size))
-			printed += ft_putchar_with_ret(' ');
-	}
-	while (printed_prec < (*precision))
+	while (printed < (*width_size) && 
+		(flags->zero == 0 || flags->dot == 1))
+		printed += ft_putchar_with_ret(' ');
+	while (printed_prec < (*precision) && flags->dot == 1)
 		printed_prec += ft_putchar_with_ret('0');
+	while (printed < (*width_size) && flags->zero == 1)
+		printed += ft_putchar_with_ret('0');
 	printed += ft_uputnbr(nbr);
 	return (printed + printed_prec);
 }
