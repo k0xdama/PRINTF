@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   unittestprintf.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/20 01:05:19 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/13 15:40:34 by pmateo           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdio.h>
 
 int	main(void)
@@ -21,4 +9,10 @@ int	main(void)
 	ret = printf("%#042X", 42000);
 	printf("\n");
 	printf("ret = %d", ret);
+
+	//to test in correct 
+	//works on every digit conversion specifiers
+	// printf("%03.0u", 0);
+	// printf("%0014.2i%020i%0002.i%000.5i", (int)-2147483648, 3, 30, -1);
+	// printf("%020.30i", -42000);
 	}

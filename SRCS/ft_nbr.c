@@ -6,31 +6,35 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:36:05 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/13 16:18:07 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/13 23:39:34 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/ft_printf.h"
 
-static int	ft_putnbr(int nbr, t_flags *flags)
+static int	ft_putnbr(int nbr, t_flags *flags, int callnb)
 {
 	long	nbl;
     int     printed;
     
     nbl = nbr;
 	printed = ft_nbrlen(nbl, 10);
+	if (nbl == 0 && (flags->dot == 1 && flags->dot_field == 0))
+	{
+		ft_putchar_with_ret(' ');
+		return(1);
+	}
 	if (nbl < 0)
 	{
-		if (flags->zero == 0)
-			write(1, "-", 1);
+		write(1, "-", 1);
 		nbl *= -1;
 	}
 	if (nbl >= 0 && nbl <= 9)
 		ft_putchar_with_ret(nbl + 48);
 	if (nbl > 9)
 	{
-		ft_putnbr(nbl / 10, flags);
-		ft_putnbr(nbl % 10, flags);
+		ft_putnbr(nbl / 10, flags, ++callnb);
+		ft_putnbr(nbl % 10, flags, ++callnb);
 	}
     return (printed);
 }
@@ -60,7 +64,7 @@ static int	dash_off(int nbr, t_flags *flags, int *precision, int *width_size)
 		printed += ft_putchar_with_ret('+');
 	while (printed_prec < (*precision))
 		printed_prec += ft_putchar_with_ret('0');
-	printed += ft_putnbr(nbr, flags);
+	printed += ft_putnbr(nbr, flags, 1);
 	return (printed + printed_prec);	
 }
 
@@ -75,7 +79,7 @@ static int	dash_on(int nbr, t_flags *flags, int *precision, int *width_size)
 		printed += ft_putchar_with_ret('+');
 	while (printed_prec < (*precision))
 		printed_prec += ft_putchar_with_ret('0');
-	printed += ft_putnbr(nbr, flags);
+	printed += ft_putnbr(nbr, flags, 1);
 	while (printed < (*width_size))
 		printed += ft_putchar_with_ret(' ');
 	return (printed + printed_prec);
@@ -91,6 +95,8 @@ int	ft_printnbr(int nbr, t_flags *flags)
 	printed = 0;
 	nbrlen = ft_nbrlen(nbr, 10);
 	precision = flags->dot_field;
+	if (precision <= nbrlen)
+		precision = 0;
 	if (flags->dot == 1 && precision > nbrlen)
 		precision -= nbrlen;
 	width_size = flags->width_field - (nbrlen + precision + flags->plus + flags->space);
