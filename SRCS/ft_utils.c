@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
 #include "../INCLUDES/ft_printf.h"
 
 void	up_struct(t_flags *flags)
@@ -27,15 +25,15 @@ void	up_struct(t_flags *flags)
 	flags->dot = 0;
 }
 
-int ft_putchar_with_ret(char c)
+int	ft_putchar_with_ret(char c)
 {
-    return(write(1, &c, 1));
+	return (write(1, &c, 1));
 }
 
 int	ft_putstr(const char *str)
 {
-	int printed;
-	int len;
+	int	printed;
+	int	len;
 
 	printed = 0;
 	len = ft_strlen(str);
@@ -44,20 +42,22 @@ int	ft_putstr(const char *str)
 		printed += write(1, "(null)", 6);
 		return (printed);
 	}
-	else 
+	else
 	{
 		printed += write(1, str, len);
 		return (printed);
 	}
 }
 
-int ft_nbrlen(long int nbr, int base)
+int	ft_nbrlen(long int nbr, int base, t_flags *flags)
 {
-    int i;
+	int	i;
 
-    i = 0;
+	i = 0;
 	if (nbr == 0)
 		i = 1;
+	if (nbr == 0 && (flags->dot == 1 && flags->dot_field == 0))
+		i = 0;
 	if (base == 10)
 	{
 		while (nbr)
@@ -68,7 +68,7 @@ int ft_nbrlen(long int nbr, int base)
 	}
 	else if (base == 16)
 	{
-		while(nbr)
+		while (nbr)
 		{
 			nbr /= 16;
 			i++;
@@ -80,7 +80,7 @@ int ft_nbrlen(long int nbr, int base)
 int	ft_atoi(const char *str, int *i)
 {
 	int	num;
-	
+
 	num = 0;
 	while (str[(*i)] >= '0' && str[(*i)] <= '9')
 	{

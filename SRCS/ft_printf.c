@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:38 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/14 04:03:38 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/14 21:33:25 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int ft_printf(const char *str, ...)
 	i = 0;
 	printed = 0;
 	va_start(args, str);
+	if (str == NULL)
+		return (-1);
 	while(str[i])
 	{
 		if(str[i] == '%')
@@ -116,7 +118,7 @@ int ft_printf(const char *str, ...)
 // {
 //     int ret = 0;
 // 	// char *str = "ntm";
-//     ret = ft_printf("%0014.2i%020i%0002.i%000.5i", (int)-2147483648, 3, 30, -1);
+//     ret = ft_printf("as soon as %-10possible", (void *) -1);
 // 	printf("\n");
 // 	printf("%d", ret);
 // }

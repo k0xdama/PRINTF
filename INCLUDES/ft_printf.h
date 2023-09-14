@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 03:45:42 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/12 04:16:22 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/14 21:35:26 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef	struct s_flags
 	int			dot;
 }				t_flags;
 
-int				ft_nbrlen(long int nb, int base);
+int				ft_nbrlen(long int nb, int base, t_flags *flags);
 int				ft_strlen(const char *str);
 int				ft_putchar_with_ret(char c);
 int				ft_putstr(const char *str);
@@ -42,6 +42,7 @@ void			up_struct(t_flags *flags);
 int				pathfinder1(const char *str, va_list args, t_flags *flags, int *i);
 void			pathfinder2(const char *str, t_flags *flags, int *i);
 int				conv_specifiers(const char *str, va_list args, t_flags *flags, int *i);
+int				ft_printf(const char *str, ...);
 int				ft_printchar(int c, t_flags *flags);
 int				ft_printstr(const char *str, t_flags *flags);
 int				ft_printptr(uintptr_t ptr, t_flags *flags);
