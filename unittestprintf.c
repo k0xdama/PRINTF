@@ -6,7 +6,7 @@ int	main(void)
 	// char *str = "ntm";
 	// str = NULL;
 	// ret = printf("%u", 42);
-	ret = printf("%#042X", 42000);
+	ret = printf("%020.30i", -42000);
 	printf("\n");
 	printf("ret = %d", ret);
 

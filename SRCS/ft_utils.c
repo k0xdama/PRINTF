@@ -60,8 +60,6 @@ int ft_nbrlen(long int nbr, int base)
 		i = 1;
 	if (base == 10)
 	{
-		if (nbr < 0)
-			i++;
 		while (nbr)
 		{
 			nbr /= 10;

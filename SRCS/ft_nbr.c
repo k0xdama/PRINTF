@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:36:05 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/13 23:39:34 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/14 04:18:06 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,13 @@ static int	ft_putnbr(int nbr, t_flags *flags, int callnb)
     
     nbl = nbr;
 	printed = ft_nbrlen(nbl, 10);
-	if (nbl == 0 && (flags->dot == 1 && flags->dot_field == 0))
-	{
-		ft_putchar_with_ret(' ');
-		return(1);
-	}
+	// if (nbl == 0 && (flags->dot == 1 && flags->dot_field == 0))
+	// {
+	// 	ft_putchar_with_ret(' ');
+	// 	return(1);
+	// }
 	if (nbl < 0)
-	{
-		write(1, "-", 1);
 		nbl *= -1;
-	}
 	if (nbl >= 0 && nbl <= 9)
 		ft_putchar_with_ret(nbl + 48);
 	if (nbl > 9)
@@ -46,25 +43,24 @@ static int	dash_off(int nbr, t_flags *flags, int *precision, int *width_size)
 
 	printed = 0;
 	printed_prec = 0;
-	if (flags->zero == 1 && flags->dot != 1)
-	{
-		if (flags->plus == 1 && nbr >= 0)
-			printed += ft_putchar_with_ret('+');
-		if (nbr < 0)
-			ft_putchar_with_ret('-');
-		while (printed < (*width_size))
-			printed += ft_putchar_with_ret('0');
-	}
-	else
-	{
-		while (printed < (*width_size))
-			printed += ft_putchar_with_ret(' ');
-	}
-	if (flags->plus == 1 && nbr >= 0)
+	while (printed < (*width_size) && (flags->zero == 0 || flags->dot == 1))
+		printed += ft_putchar_with_ret(' ');
+	if (nbr >= 0 && (flags->plus == 1 && flags->zero == 1 && flags->dot == 0))
 		printed += ft_putchar_with_ret('+');
+	if (nbr < 0 && (flags->dot == 0))
+		printed += ft_putchar_with_ret('-');
+	while (printed < (*width_size) && (flags->zero == 1 && flags->dot == 0))
+		printed += ft_putchar_with_ret('0');
+	if (nbr >= 0 && (flags->plus == 1 && flags->dot == 1))
+		printed += ft_putchar_with_ret('+');
+	if (nbr < 0 && flags->dot == 1)
+		printed += ft_putchar_with_ret('-');
 	while (printed_prec < (*precision))
 		printed_prec += ft_putchar_with_ret('0');
-	printed += ft_putnbr(nbr, flags, 1);
+	if (nbr == 0 && (flags->dot == 1 && flags->dot_field == 0))
+		printed += ft_putchar_with_ret(' ');
+	else
+		printed += ft_putnbr(nbr, flags, 1);
 	return (printed + printed_prec);	
 }
 
@@ -77,9 +73,14 @@ static int	dash_on(int nbr, t_flags *flags, int *precision, int *width_size)
 	printed_prec = 0;
 	if (flags->plus == 1)
 		printed += ft_putchar_with_ret('+');
+	if (nbr < 0)
+		printed += ft_putchar_with_ret('-');
 	while (printed_prec < (*precision))
 		printed_prec += ft_putchar_with_ret('0');
-	printed += ft_putnbr(nbr, flags, 1);
+	if (nbr == 0 && (flags->dot == 1 && flags->dot_field == 0))
+		printed += ft_putchar_with_ret(' ');
+	else
+		printed += ft_putnbr(nbr, flags, 1);
 	while (printed < (*width_size))
 		printed += ft_putchar_with_ret(' ');
 	return (printed + printed_prec);
@@ -99,6 +100,8 @@ int	ft_printnbr(int nbr, t_flags *flags)
 		precision = 0;
 	if (flags->dot == 1 && precision > nbrlen)
 		precision -= nbrlen;
+	// if (nbr < 0 && (precision < nbrlen || flags->zero == 1))
+	// 	nbrlen += 1;
 	width_size = flags->width_field - (nbrlen + precision + flags->plus + flags->space);
 	if (flags->space == 1 && nbr >= 0)
 		printed += ft_putchar_with_ret(' ');
