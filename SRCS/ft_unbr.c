@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:40 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/14 18:43:17 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/15 18:02:33 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static int	ft_uputnbr(unsigned int nbr, t_flags *flags, int callnb)
 {
 	unsigned long	nbl;
-	int len;
+	int				len;
+
 	if (nbr == 0 && (flags->dot == 1 && flags->dot_field == 0 && callnb == 1))
 		return (0);
 	nbl = nbr;
@@ -30,7 +31,7 @@ static int	ft_uputnbr(unsigned int nbr, t_flags *flags, int callnb)
 	return (len);
 }
 
-static int	dash_on(unsigned int nbr, t_flags *flags, int *precision, int *width_size)
+static int	dash_on(unsigned int nbr, t_flags *flags, int *prec, int *width)
 {
 	int	printed;
 	int	printed_prec;
@@ -39,27 +40,27 @@ static int	dash_on(unsigned int nbr, t_flags *flags, int *precision, int *width_
 	printed = 0;
 	printed_prec = 0;
 	printed_width = 0;
-	while (printed_prec < (*precision))
+	while (printed_prec < (*prec))
 		printed_prec += ft_putchar_with_ret('0');
 	printed += ft_uputnbr(nbr, flags, 1);
-	while (printed_width < (*width_size))
+	while (printed_width < (*width))
 		printed_width += ft_putchar_with_ret(' ');
 	return (printed + printed_prec + printed_width);
 }
 
-static int	dash_off(unsigned int nbr, t_flags *flags, int *precision, int *width_size)
+static int	dash_off(unsigned int nbr, t_flags *flags, int *prec, int *width)
 {
 	int	printed;
 	int	printed_prec;
 
 	printed = 0;
 	printed_prec = 0;
-	while (printed < (*width_size) && 
-		(flags->zero == 0 || flags->dot == 1))
+	while (printed < (*width)
+		&& (flags->zero == 0 || flags->dot == 1))
 		printed += ft_putchar_with_ret(' ');
-	while (printed_prec < (*precision) && flags->dot == 1)
+	while (printed_prec < (*prec) && flags->dot == 1)
 		printed_prec += ft_putchar_with_ret('0');
-	while (printed < (*width_size) && flags->zero == 1)
+	while (printed < (*width) && flags->zero == 1)
 		printed += ft_putchar_with_ret('0');
 	printed += ft_uputnbr(nbr, flags, 1);
 	return (printed + printed_prec);
@@ -69,24 +70,23 @@ int	ft_printunbr(unsigned int nbr, t_flags *flags)
 {
 	int	printed;
 	int	nbrlen;
-	int	precision;
-	int	width_size;
+	int	prec;
+	int	width;
 
 	printed = 0;
 	nbrlen = ft_nbrlen(nbr, 10, flags);
-	precision = flags->dot_field;
-	if (precision <= nbrlen)
-		precision = 0;
-	if (flags->dot == 1 && precision > nbrlen)
-		precision -= nbrlen;
-	width_size = flags->width_field - (nbrlen + precision);
+	prec = flags->dot_field;
+	if (prec <= nbrlen)
+		prec = 0;
+	if (flags->dot == 1 && prec > nbrlen)
+		prec -= nbrlen;
+	width = flags->width_field - (nbrlen + prec);
 	if (flags->dash == 1)
-		printed += dash_on(nbr, flags, &precision, &width_size);
+		printed += dash_on(nbr, flags, &prec, &width);
 	else if (flags->dash == 0)
-		printed += dash_off(nbr, flags, &precision, &width_size);
-	return (printed); 
+		printed += dash_off(nbr, flags, &prec, &width);
+	return (printed);
 }
-
 
 // int	main(void)
 // {

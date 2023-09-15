@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:31 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/14 19:55:37 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/15 18:07:15 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_strlen(const char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	if (str == NULL)
 		return (6);
@@ -26,8 +26,8 @@ int	ft_strlen(const char *str)
 
 static	int	ft_putstr2(const char *str, t_flags *flags)
 {
-	int printed;
-	int len;
+	int	printed;
+	int	len;
 
 	printed = 0;
 	len = ft_strlen(str);
@@ -43,7 +43,7 @@ static	int	ft_putstr2(const char *str, t_flags *flags)
 			return (printed);
 		}
 	}
-	else 
+	else
 	{
 		printed += write(1, str, len);
 		return (printed);
@@ -53,8 +53,8 @@ static	int	ft_putstr2(const char *str, t_flags *flags)
 int	ft_printstr(const char *str, t_flags *flags)
 {
 	int	printed;
-	int printed_width;
-	int precision;
+	int	printed_width;
+	int	precision;
 	int	width_size;
 
 	printed = 0;
@@ -72,4 +72,3 @@ int	ft_printstr(const char *str, t_flags *flags)
 		printed += ft_putstr2(str, flags);
 	return (printed + printed_width);
 }
-

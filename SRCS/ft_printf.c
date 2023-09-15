@@ -6,16 +6,16 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:38 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/14 21:33:25 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/15 18:06:13 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/ft_printf.h"
 
-int     conv_specifiers(const char *str, va_list args, t_flags *flags, int *i)
+int	conv_specifiers(const char *str, va_list args, t_flags *flags, int *i)
 {
 	int	printed;
-	
+
 	printed = 0;
 	if (str[(*i)] == 'c')
 		printed += ft_printchar(va_arg(args, int), flags);
@@ -28,7 +28,8 @@ int     conv_specifiers(const char *str, va_list args, t_flags *flags, int *i)
 	else if (str[(*i)] == 'u')
 		printed += ft_printunbr(va_arg(args, unsigned int), flags);
 	else if (str[(*i)] == 'x' || str[(*i)] == 'X')
-		printed += ft_printhexa(va_arg(args, unsigned long int), flags, str[(*i)]);
+		printed += ft_printhexa(va_arg(args, unsigned long int),
+				flags, str[(*i)]);
 	else if (str[(*i)] == '%')
 		printed += ft_printchar('%', flags);
 	return (printed);
@@ -49,7 +50,7 @@ void	pathfinder2(const char *str, t_flags *flags, int *i)
 
 static int	is_flags(char c)
 {
-	char *flags;
+	char	*flags;
 
 	flags = "-+ #";
 	while (*flags)
@@ -63,7 +64,7 @@ static int	is_flags(char c)
 
 int	pathfinder1(const char *str, va_list args, t_flags *flags, int *i)
 {
-	int printed;
+	int	printed;
 
 	printed = 0;
 	(*i)++;
@@ -77,7 +78,7 @@ int	pathfinder1(const char *str, va_list args, t_flags *flags, int *i)
 			flags->space = 1;
 		else if (str[(*i)] == '#')
 			flags->htag = 2;
-		(*i)++;	
+		(*i)++;
 	}
 	pathfinder2(str, flags, i);
 	printed += conv_specifiers(str, args, flags, i);
@@ -85,21 +86,21 @@ int	pathfinder1(const char *str, va_list args, t_flags *flags, int *i)
 	return (printed);
 }
 
-int ft_printf(const char *str, ...)
+int	ft_printf(const char *str, ...)
 {
-	int	i;
-	int	printed;
-	va_list args;
-	t_flags flags;
+	int		i;
+	int		printed;
+	va_list	args;
+	t_flags	flags;
 
 	i = 0;
 	printed = 0;
 	va_start(args, str);
 	if (str == NULL)
 		return (-1);
-	while(str[i])
+	while (str[i])
 	{
-		if(str[i] == '%')
+		if (str[i] == '%')
 		{
 			up_struct(&flags);
 			printed += pathfinder1(str, args, &flags, &i);
