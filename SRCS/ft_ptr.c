@@ -6,7 +6,7 @@
 /*   By: pmateo <pmateo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:44:36 by pmateo            #+#    #+#             */
-/*   Updated: 2023/09/15 17:58:03 by pmateo           ###   ########.fr       */
+/*   Updated: 2023/09/15 18:30:13 by pmateo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static int	ft_putptr(uintptr_t ptr)
 
 	len = ft_ptrlen((unsigned long)ptr);
 	base = "0123456789abcdef";
-	if (ptr <= 16)
+	if (ptr < 16)
 		ft_putchar_with_ret(base[ptr]);
-	if (ptr > 16)
+	if (ptr >= 16)
 	{
 		ft_putptr(ptr / 16);
 		ft_putptr(ptr % 16);
